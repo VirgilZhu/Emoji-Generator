@@ -1,32 +1,22 @@
 # Proj review
 
 ## 0.Content
-```
-|
-|__1.Make a decision
-|   |__1.1 Why
-|   |__1.2 Who
-|   |__1.3 How
-|   |__1.4 What
-|
-|__2.User Journey
-|
-|__3.User Story
-|
-|__4.Abstruct Level Structure
-|   |__4.1 Weekly Plan
-|   |__4.2 Developing Structure
-|       |__4.2.1 Backend
-|       |__4.2.2 Ftrontend
-|       |__4.2.3 AI Model
-|
-|__5.Week 1 Sprint
-    |__5.1 Sprint Planing.
-    |__5.2 Sprint Review & Sprint Retrospective
-```
+- [1. Make a decision](#1make-a-decision)
+  - [1.1 Why](#11-why)
+  - [1.2 Who](#12-who)
+  - [1.3 How](#13-how)
+  - [1.4 What](#14-what)
+- [2. User Journey](#2user-journey)
+- [3. User Story](#3user-story)
+- [4. AbstractLevel Structure](#4abstract-level-structure)
+  - [4.1 Weekly Plan](#41-weekly-plan)
+  - [4.2 Developing Structure](#42-developing-structure)
+    - [4.2.1 Backend](#421-backend)
+    - [4.2.2 Frontend](#422-frontend)
+    - [4.2.3 AI Model](#423-ai-model)
 
 
-## 1.影响地图（Make a Decision 想要做一个什么软件 宏观表达）
+## 1.Make a Decision
 
 ### 1.1 Why?
 **动机**: 
@@ -57,7 +47,7 @@
 
 
 
-## 2.用户旅程（User Journey）
+## 2.User Journey
 
 ### 功能1: 图片处理选项
 
@@ -157,7 +147,7 @@
 - 用户可以一键保存生成的表情包到本地相册。
 - 用户可以通过点击“分享”按钮，将表情包直接发送至微信聊天。
 
-## 4.Abstruct Level Structure
+## 4.Abstract Level Structure
 
 ### 4.1 Weekly Plan
 
@@ -176,6 +166,83 @@
 - 优化图片处理算法和AI模型集成。
 - 进行系统测试和用户体验测试，修复和优化问题。
 
+<details><summary>plan</summary>
+
+### User Story 1: 图片处理选项
+
+#### Splitting
+1. 图片上传功能
+    - 上传按钮
+    - 从相册选择图片
+    - 拍照上传
+2. 图片处理选项界面
+    - 添加文字
+    - 修改图片内容
+    - 应用滤镜
+3. 实时预览功能
+
+#### Sizing
+1. 图片上传功能: 5 工作日
+    - 上传按钮: 1 工作日
+    - 从相册选择图片: 2 工作日
+    - 拍照上传: 2 工作日
+2. 图片处理选项界面: 10 工作日
+    - 添加文字: 3 工作日
+    - 修改图片内容: 4 工作日
+    - 应用滤镜: 3 工作日
+3. 实时预览功能: 5 工作日
+
+#### Ordering
+1. 图片上传功能
+2. 图片处理选项界面
+3. 实时预览功能
+
+### User Story 2: 预览与编辑
+
+#### Splitting
+1. 实时预览区
+2. 编辑功能
+    - 调整处理效果
+    - 重置按钮
+
+#### Sizing
+1. 实时预览区: 5 工作日
+2. 编辑功能: 5 工作日
+    - 调整处理效果: 3 工作日
+    - 重置按钮: 2 工作日
+
+#### Ordering
+1. 实时预览区
+2. 编辑功能
+
+### User Story 3: 表情包生成，保存与分享
+
+#### Splitting
+1. 表情包生成
+2. 保存到本地相册
+3. 分享至微信聊天
+
+#### Sizing
+1. 表情包生成: 3 工作日
+2. 保存到本地相册: 2 工作日
+3. 分享至微信聊天: 3 工作日
+
+#### Ordering
+1. 表情包生成
+2. 保存到本地相册
+3. 分享至微信聊天
+
+### Overall Plan
+1. 图片上传功能 (User Story 1)
+2. 图片处理选项界面 (User Story 1)
+3. 实时预览功能 (User Story 1)
+4. 实时预览区 (User Story 2)
+5. 编辑功能 (User Story 2)
+6. 表情包生成 (User Story 3)
+7. 保存到本地相册 (User Story 3)
+8. 分享至微信聊天 (User Story 3)
+</details>
+
 ### 4.2 Developing Structure
 
 #### 4.2.1 Backend
@@ -192,7 +259,7 @@
 - 进行性能优化和安全性检查。
 - 进行综合性测试，确保系统稳定性和安全性。
 
-#### 4.2.2 Ftrontend
+#### 4.2.2 Frontend
 
 **第一周：**
 - 设计初始的用户界面和交互功能。
