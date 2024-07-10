@@ -1,8 +1,7 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  position: relative;
+  width: 100%;
+  height: 100vh;
 }
 
 .preview-image {
@@ -36,4 +35,19 @@
   border-radius: 5px;
   font-size: 16px;
   box-sizing: border-box;
+}
+
+.btn1 {
+  position: absolute;
+  top: 0%; /* 距离顶部50% */
+  left: 2%; /* 距离左边50% */
+  width: 80%;
+  margin-top: 20rpx;
+  background-color: rgb(158, 204, 51);
+  color: white;
+  border-radius: 98rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
