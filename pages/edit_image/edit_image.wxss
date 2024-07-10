@@ -13,7 +13,8 @@
 .picker {
   margin-top: 20px;
   padding: 10px;
-  background-color: #f0f0f0;
+  background-color: rgb(158, 204, 51);
+  color: white;
   border-radius: 5px;
 }
 
@@ -37,7 +38,7 @@
   box-sizing: border-box;
 }
 
-.btn1 {
+.btnUpload {
   position: absolute;
   top: 0%; /* 距离顶部50% */
   left: 3%; /* 距离左边50% */
@@ -51,3 +52,43 @@
   align-items: center;
   justify-content: center;
 }
+
+.btnSaved {
+  position: absolute;
+  top: 0%; /* 距离顶部50% */
+  left: 50%; /* 距离左边50% */
+  width: 80%;
+  margin-top: 20rpx;
+  background-color: rgb(158, 204, 51);
+  color: white;
+  border-radius: 98rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnSaved[disabled] {
+  background-color: #ddd;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.green-button {
+  background-color: #4CAF50; /* 绿色背景 */
+  color: white;             /* 白色文字 */
+  border: none;             /* 无边框 */
+  padding: 15px 32px;       /* 内边距 */
+  text-align: center;       /* 文字居中 */
+  text-decoration: none;    /* 无下划线 */
+  display: inline-block;    /* 内联块元素 */
+  font-size: 16px;          /* 字体大小 */
+  margin: 4px 2px;          /* 外边距 */
+  cursor: pointer;          /* 鼠标悬停时的光标样式 */
+  border-radius: 4px;       /* 圆角边框 */
+}
+
+.green-button:hover {
+  background-color: #45a049; /* 悬停时的背景色 */
+}
+

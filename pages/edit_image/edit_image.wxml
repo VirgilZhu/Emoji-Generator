@@ -1,10 +1,14 @@
 <view class="container">
-  <button class="btn1" bindtap="chooseImage">
+  <button class="btnUpload" bindtap="chooseImage">
     <view>Upload Image</view>
   </button>
+  <button class="btnSaved" bindtap="saveImage" disabled="{{!imageSrc}}">
+    <view>Save Image</view>
+  </button>
+
+  <image src="{{imageSrc || './cam.webp'}}" mode="widthFix" class="preview-image {{selectedStyle}}"></image>
 
   <view wx:if="{{imageSrc}}">
-    <image src="{{imageSrc}}" mode="widthFix" class="preview-image {{selectedStyle}}"></image>
 
     <picker mode="selector" range="{{styles}}" bindchange="selectStyleChange">
       <view class="picker">
@@ -13,8 +17,7 @@
     </picker>
 
     <textarea placeholder="Enter text" bindinput="inputTextChange" class="input-text"></textarea>
-    <button bindtap="applyText">Add Text</button>
-    <button bindtap="saveImage">Save Image</button>
+    <button class="green-button" bindtap="applyText">Add Text</button>
 
     <canvas canvas-id="myCanvas" style="display:none;" width="{{canvasWidth}}" height="{{canvasHeight}}"></canvas>
   </view>
