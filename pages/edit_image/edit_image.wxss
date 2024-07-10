@@ -13,7 +13,8 @@
 .picker {
   margin-top: 20px;
   padding: 10px;
-  background-color: #f0f0f0;
+  background-color: rgb(158, 204, 51);
+  color: white;
   border-radius: 5px;
 }
 
