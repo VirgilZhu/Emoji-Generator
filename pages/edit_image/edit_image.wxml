@@ -6,8 +6,9 @@
     <view>Save Image</view>
   </button>
 
+  <image src="{{imageSrc || './cam.webp'}}" mode="widthFix" class="preview-image {{selectedStyle}}"></image>
+
   <view wx:if="{{imageSrc}}">
-    <image src="{{imageSrc}}" mode="widthFix" class="preview-image {{selectedStyle}}"></image>
 
     <picker mode="selector" range="{{styles}}" bindchange="selectStyleChange">
       <view class="picker">
