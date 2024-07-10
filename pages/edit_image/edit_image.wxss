@@ -1,0 +1,28 @@
+/* index.wxss */
+.container {
+  padding: 20px;
+}
+
+.upload-section {
+  margin-bottom: 20px;
+}
+
+.image-section {
+  margin-bottom: 20px;
+}
+
+.edit-section {
+  margin-top: 20px;
+}
+
+.edit-area {
+  position: relative;
+}
+
+.edit-text {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: red;
+  font-size: 20px;
+}

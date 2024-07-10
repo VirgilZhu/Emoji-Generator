@@ -1,0 +1,20 @@
+<!-- index.wxml -->
+<view class="container">
+  <view class="upload-section">
+    <button bindtap="chooseImage">上传图片</button>
+  </view>
+  
+  <view class="image-section" wx:if="{{imagePath}}">
+    <image src="{{imagePath}}" mode="widthFix"></image>
+  </view>
+  
+  <view class="edit-section" wx:if="{{imagePath}}">
+    <button bindtap="addText">添加文字</button>
+    <button bindtap="applyFilter">应用滤镜</button>
+    <!-- 实时编辑内容显示区域 -->
+    <view class="edit-area">
+      <text class="edit-text">{{editText}}</text>
+      <!-- 其他编辑内容 -->
+    </view>
+  </view>
+</view>
