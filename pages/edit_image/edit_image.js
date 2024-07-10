@@ -2,7 +2,7 @@ Page({
   data: {
     imageSrc: '',
     inputText: '',
-    styles: ['Original', 'Grayscale', 'Sepia'],
+    styles: ['Original', 'Grayscale', 'Sepia', '黑白'],
     selectedStyle: 'Original',
     canvasWidth: 0,
     canvasHeight: 0

@@ -16,6 +16,7 @@
   background-color: rgb(158, 204, 51);
   color: white;
   border-radius: 5px;
+  text-align: center;
 }
 
 .grayscale {
@@ -40,32 +41,48 @@
 
 .btnUpload {
   position: absolute;
-  top: 0%; /* 距离顶部50% */
-  left: 3%; /* 距离左边50% */
+  top: 0%; 
+  left: 3%; 
   width: 80%;
   margin-top: 20rpx;
-  background-color: rgb(158, 204, 51);
+  /* background-color: rgb(173, 214, 76); */
+  background: linear-gradient(132deg, #1A8DEB -7%, rgba(47, 50, 232, 0.6728) 32%, rgba(25, 27, 185, 0.3338) 66%, rgba(255, 255, 255, 0) 100%);
   color: white;
   border-radius: 98rpx;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  padding-left: 38px; 
   justify-content: center;
+}
+
+.btnUploadImg{
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  left: 8px; 
 }
 
 .btnSaved {
   position: absolute;
-  top: 0%; /* 距离顶部50% */
-  left: 50%; /* 距离左边50% */
+  top: 0%; 
+  right: 3%; 
   width: 80%;
   margin-top: 20rpx;
-  background-color: rgb(158, 204, 51);
+  /* background-color: rgb(158, 204, 51); */
+  background: linear-gradient(132deg, #1A8DEB -7%, rgba(47, 50, 232, 0.6728) 32%, rgba(25, 27, 185, 0.3338) 66%, rgba(255, 255, 255, 0) 100%);
   color: white;
   border-radius: 98rpx;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  padding-left: 38px; 
   justify-content: center;
+}
+
+.btnSaveImg{
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  left: 8px; 
 }
 
 .btnSaved[disabled] {

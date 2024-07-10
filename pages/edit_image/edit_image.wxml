@@ -1,18 +1,20 @@
 <view class="container">
-  <button class="btnUpload" bindtap="chooseImage">
-    <view>Upload Image</view>
+  <button style="width:25vw" class="btnUpload" bindtap="chooseImage">
+    <image class="btnUploadImg" src='./image/upload.png' alt="Upload Icon"></image>
+    <view>上传</view>
   </button>
-  <button class="btnSaved" bindtap="saveImage" disabled="{{!imageSrc}}">
-    <view>Save Image</view>
+  <button style="width:25vw" class="btnSaved" bindtap="saveImage" disabled="{{!imageSrc}}">
+    <image class="btnSaveImg" src='./image/save.png' alt="Upload Icon"></image>
+    <view>保存</view>
   </button>
 
-  <image src="{{imageSrc || './cam.webp'}}" mode="widthFix" class="preview-image {{selectedStyle}}"></image>
+  <image src="{{imageSrc || './image/cam.webp'}}" mode="widthFix" class="preview-image {{selectedStyle}}"></image>
 
   <view wx:if="{{imageSrc}}">
 
     <picker mode="selector" range="{{styles}}" bindchange="selectStyleChange">
       <view class="picker">
-        Current style: {{selectedStyle}}
+      样式: {{selectedStyle}}
       </view>
     </picker>
 
