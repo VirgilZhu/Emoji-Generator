@@ -1,7 +1,3 @@
 {
-  "navigationBarTitleText": "图片上传与编辑",
-  "navigationBarBackgroundColor": "#ffffff",
-  "navigationBarTextStyle": "black",
-  "backgroundColor": "#ffffff",
-  "backgroundTextStyle": "light"
+  "navigationBarTitleText": "Image Editor"
 }

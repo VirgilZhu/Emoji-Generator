@@ -1,33 +1,83 @@
-// index.js
 Page({
   data: {
-    imagePath: '',
-    editText: ''
+    imageSrc: '',
+    inputText: '',
+    styles: ['Original', 'Grayscale', 'Sepia'],
+    selectedStyle: 'Original',
+    canvasWidth: 0,
+    canvasHeight: 0
   },
   
-  chooseImage: function() {
-    var that = this;
+  chooseImage() {
+    const that = this;
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
-      success (res) {
-        // tempFilePath 可以作为 img 标签的 src 属性显示图片
-        const tempFilePath = res.tempFilePaths[0];
-        that.setData({
-          imagePath: tempFilePath
+      success(res) {
+        const tempFilePaths = res.tempFilePaths;
+        wx.getImageInfo({
+          src: tempFilePaths[0],
+          success(imageInfo) {
+            that.setData({
+              imageSrc: tempFilePaths[0],
+              canvasWidth: imageInfo.width,
+              canvasHeight: imageInfo.height
+            });
+          }
         });
       }
     });
   },
-  
-  addText: function() {
+
+  inputTextChange(e) {
     this.setData({
-      editText: '这是添加的文字'
+      inputText: e.detail.value
     });
   },
-  
-  applyFilter: function() {
-    // 在这里实现滤镜效果
+
+  applyText() {
+    wx.showToast({
+      title: `Text "${this.data.inputText}" added!`,
+      icon: 'success',
+      duration: 2000
+    });
+  },
+
+  selectStyleChange(e) {
+    this.setData({
+      selectedStyle: this.data.styles[e.detail.value]
+    });
+  },
+
+  saveImage() {
+    const { imageSrc } = this.data;
+
+    if (!imageSrc) {
+      wx.showToast({
+        title: 'No image to save',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
+
+    wx.saveImageToPhotosAlbum({
+      filePath: imageSrc,
+      success() {
+        wx.showToast({
+          title: 'Image saved!',
+          icon: 'success',
+          duration: 2000
+        });
+      },
+      fail() {
+        wx.showToast({
+          title: 'Save failed',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
   }
 });

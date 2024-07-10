@@ -1,20 +1,19 @@
-<!-- index.wxml -->
 <view class="container">
-  <view class="upload-section">
-    <button bindtap="chooseImage">上传图片</button>
-  </view>
-  
-  <view class="image-section" wx:if="{{imagePath}}">
-    <image src="{{imagePath}}" mode="widthFix"></image>
-  </view>
-  
-  <view class="edit-section" wx:if="{{imagePath}}">
-    <button bindtap="addText">添加文字</button>
-    <button bindtap="applyFilter">应用滤镜</button>
-    <!-- 实时编辑内容显示区域 -->
-    <view class="edit-area">
-      <text class="edit-text">{{editText}}</text>
-      <!-- 其他编辑内容 -->
-    </view>
+  <button bindtap="chooseImage">Upload Image</button>
+
+  <view wx:if="{{imageSrc}}">
+    <image src="{{imageSrc}}" mode="widthFix" class="preview-image {{selectedStyle}}"></image>
+
+    <picker mode="selector" range="{{styles}}" bindchange="selectStyleChange">
+      <view class="picker">
+        Current style: {{selectedStyle}}
+      </view>
+    </picker>
+
+    <textarea placeholder="Enter text" bindinput="inputTextChange" class="input-text"></textarea>
+    <button bindtap="applyText">Add Text</button>
+    <button bindtap="saveImage">Save Image</button>
+
+    <canvas canvas-id="myCanvas" style="display:none;" width="{{canvasWidth}}" height="{{canvasHeight}}"></canvas>
   </view>
 </view>

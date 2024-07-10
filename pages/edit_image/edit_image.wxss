@@ -1,28 +1,39 @@
-/* index.wxss */
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
 }
 
-.upload-section {
-  margin-bottom: 20px;
-}
-
-.image-section {
-  margin-bottom: 20px;
-}
-
-.edit-section {
+.preview-image {
+  width: 100%;
+  max-width: 300px;
   margin-top: 20px;
 }
 
-.edit-area {
-  position: relative;
+.picker {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
 }
 
-.edit-text {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  color: red;
-  font-size: 20px;
+.grayscale {
+  filter: grayscale(100%);
+}
+
+.sepia {
+  filter: sepia(100%);
+}
+
+.input-text {
+  width: 100%;
+  max-width: 300px;
+  height: 100px;
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
 }
