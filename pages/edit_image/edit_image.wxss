@@ -40,7 +40,7 @@
 .btn1 {
   position: absolute;
   top: 0%; /* 距离顶部50% */
-  left: 2%; /* 距离左边50% */
+  left: 3%; /* 距离左边50% */
   width: 80%;
   margin-top: 20rpx;
   background-color: rgb(158, 204, 51);
