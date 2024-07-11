@@ -36,8 +36,8 @@ Page({
     const that = this;
     wx.getFileSystemManager().readFile(
       {
-        filePath: that.imageSrc,
-        encodeing: "base64",
+        filePath: that.data.imageSrc,
+        encoding: "base64",
         success: function(res) {
           // that.data.baseImg.push('data:image/png;base64,' + res.data);
           that.upCont(that.data.inputText, that.data.baseImg);
@@ -45,7 +45,6 @@ Page({
 
       }
     )
-
   },
 
   upCont: function (){
@@ -66,13 +65,31 @@ Page({
       // responseType: "arraybuffer",
       success:(res) =>{
               let url ="data:image/png;base64," + res.data.result
-              that.setData({
-                imageSrc : url, 
-              })    
+              const fileSystemManager = wx.getFileSystemManager();
+              const filePath = `${wx.env.USER_DATA_PATH}/modified_image.png`; // 保存图像到小程序的用户数据路径
+              const buffer = wx.base64ToArrayBuffer(res.data.result); // 将 base64 编码转换为 ArrayBuffer
+
+              fileSystemManager.writeFile({
+                filePath: filePath,
+                data: buffer,
+                encoding: 'binary',
+                success: () => {
+                  that.setData({
+                    imageSrc: filePath, // 更新 imageSrc 为本地文件路径
+                  });
+                  wx.showToast({
+                    title: 'Image modified successfully!',
+                    icon: 'success',
+                    duration: 2000
+                  });
+                },
+                fail: (err) => {
+                  console.error('Failed to save modified image:', err);
+                }
+              });
       }
     });
     console.log(that.data.imageSrc);
-
   },
 
   test: function (baseImg, inputTest){
@@ -107,45 +124,6 @@ Page({
       }
     })
   },
-  // test() {
-  //   const that = this;
-  //   const result =  wx.cloud.callContainer({
-  //     "config": {
-  //       "env": "prod-4g06jpu1405b6a90"
-  //     },
-  //     "path": "/add",
-  //     "header": {
-  //       "X-WX-SERVICE": "emoji-generator",
-  //       "content-type": "application/json"
-  //     },
-  //     "method": "POST",
-  //     "data": {
-  //       "num1": 1,
-  //       "num2": 3
-  //     },
-  //     "responseType": "arraybuffer",
-  //     success: (res) => {
-  //       console.log(res.data.result);
-  //       that.setData({
-  //         test1 : res.data.result
-  //       });
-  //       console.log(this.data.test1);
-  //     }
-  
-  //   });
-  //   console.log(this.data.test1);
-  //   // debugger;
-  //   // console.log(result);
-  //   // debugger;
-  //   // let test1 = ret;
-
-  //   // wx.showToast({
-  //   //           title: `"${test1}"`,
-  //   //           icon: 'success',
-  //   //           duration: 2000
-  //   //         });
-  // },
-
 
   inputTextChange(e) {
     this.setData({
@@ -188,7 +166,7 @@ Page({
           duration: 2000
         });
       },
-      fail() {
+      fail(err) {
         console.log(err)
         wx.showToast({
           title: 'Save failed',
