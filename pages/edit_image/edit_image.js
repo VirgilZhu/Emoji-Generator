@@ -65,13 +65,19 @@ Page({
       },
       // responseType: "arraybuffer",
       success:(res) =>{
-              let url ="data:image/png;base64," + res.data.result
+              let base64 ="data:image/png;base64," + res.data.result;
+              var imgPath = wx.env.USER_DATA_PATH + 'temp' + '.png';
+              var imageData = base64.replace(/^data:image\/\w+;base64,/, "");
+              var fs = wx.getFileSystemManager();
+              fs.writeFileSync(imgPath, imageData, "base64");
+              // console.log(url);
               that.setData({
-                imageSrc : url, 
-              })    
+                imageSrc : imgPath, 
+              })  
+              console.log(this.data.imageSrc);  
       }
     });
-    console.log(that.data.imageSrc);
+    console.log(this.data.imageSrc);
 
   },
 
@@ -178,24 +184,22 @@ Page({
       });
       return;
     }
-
-    wx.saveImageToPhotosAlbum({
-      filePath: imageSrc,
-      success() {
-        wx.showToast({
-          title: 'Image saved!',
-          icon: 'success',
-          duration: 2000
-        });
-      },
-      fail() {
-        console.log(err)
-        wx.showToast({
-          title: 'Save failed',
-          icon: 'none',
-          duration: 2000
-        });
-      }
-    });
-  }
+    wx.downloadFile({    //  下载图片到本地
+      url: this.data.imageSrc,    //  下载的图片地址
+        success(res) {
+          if (res.statusCode === 200) {
+            wx.saveImageToPhotosAlbum({      //  保存到系统相册
+              filePath: res.tempFilePath,       //   图片图片地址
+              success(res) {
+                wx.showToast({
+                  title: 'Image saved!',
+                  icon: 'success',
+                  duration: 2000
+                })
+              }
+            })
+          }
+        }
+      })
+  },
 });
