@@ -8,7 +8,7 @@
     <view>保存</view>
   </button>
 
-  <image src="{{imageSrc || './image/cam.webp'}}" mode="widthFix" class="preview-image {{selectedStyle}}"></image>
+  <image src="{{imageSrc || './image/cam.webp'}}" mode="aspectFit" class="preview-image {{selectedStyle}}"></image>
 
   <view wx:if="{{imageSrc}}">
 

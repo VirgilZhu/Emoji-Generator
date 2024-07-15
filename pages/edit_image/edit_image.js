@@ -36,8 +36,8 @@ Page({
     const that = this;
     wx.getFileSystemManager().readFile(
       {
-        filePath: that.imageSrc,
-        encodeing: "base64",
+        filePath: that.data.imageSrc,
+        encoding: "base64",
         success: function(res) {
           // that.data.baseImg.push('data:image/png;base64,' + res.data);
           that.upCont(that.data.inputText, that.data.baseImg);
@@ -45,41 +45,60 @@ Page({
 
       }
     )
-
   },
 
-  upCont: function (){
+  upCont: function () {
     const that = this;
-    let base64 = wx.getFileSystemManager().readFileSync(this.data.imageSrc, 'base64')
-    // console.log(base64);
-    // console.log(this.data.inputText);
+    let base64 = wx.getFileSystemManager().readFileSync(this.data.imageSrc, 'base64');
+    
     wx.request({
-      url: "http://127.0.0.1:5000/graywordmeme",
-      method: "POST",
-      data: {
-        img: base64,
-        text: this.data.inputText
-      },
-      header:{
-        'Content-Type':'application/json'
-      },
-      // responseType: "arraybuffer",
-      success:(res) =>{
-              let base64 ="data:image/png;base64," + res.data.result;
-              var imgPath = wx.env.USER_DATA_PATH + 'temp' + '.png';
-              var imageData = base64.replace(/^data:image\/\w+;base64,/, "");
-              var fs = wx.getFileSystemManager();
-              fs.writeFileSync(imgPath, imageData, "base64");
-              // console.log(url);
-              that.setData({
-                imageSrc : imgPath, 
-              })  
-              console.log(this.data.imageSrc);  
-      }
-    });
-    console.log(this.data.imageSrc);
+        url: "http://39.105.8.203/graywordmeme",
+        method: "POST",
+        data: {
+            img: base64,
+            text: this.data.inputText
+        },
+        header: {
+            'Content-Type': 'application/json'
+        },
+        success: (res) => {
+            let base64Data = res.data.result;
+            let filePath = `${wx.env.USER_DATA_PATH}/modified_image.png`; // 保存图像到小程序的用户数据路径
 
+            // Convert base64 to ArrayBuffer manually
+            let binaryString = atob (base64Data); // Decode base64 to binary string
+            let len = binaryString.length;
+            let buffer = new ArrayBuffer(len);
+            let view = new Uint8Array(buffer);
+            for (let i = 0; i < len; i++) {
+                view[i] = binaryString.charCodeAt(i);
+            }
+
+            wx.getFileSystemManager().writeFile({
+                filePath: filePath,
+                data: buffer,
+                encoding: 'binary',
+                success: () => {
+                    that.setData({
+                        imageSrc: filePath, // 更新 imageSrc 为本地文件路径
+                    });
+                    wx.showToast({
+                        title: 'Image modified successfully!',
+                        icon: 'success',
+                        duration: 2000
+                    });
+                },
+                fail: (err) => {
+                    console.error('Failed to save modified image:', err);
+                }
+            });
+        },
+        fail: (err) => {
+            console.error('Request failed:', err);
+        }
+    });
   },
+
 
   test: function (baseImg, inputTest){
     const that = this;
@@ -113,45 +132,6 @@ Page({
       }
     })
   },
-  // test() {
-  //   const that = this;
-  //   const result =  wx.cloud.callContainer({
-  //     "config": {
-  //       "env": "prod-4g06jpu1405b6a90"
-  //     },
-  //     "path": "/add",
-  //     "header": {
-  //       "X-WX-SERVICE": "emoji-generator",
-  //       "content-type": "application/json"
-  //     },
-  //     "method": "POST",
-  //     "data": {
-  //       "num1": 1,
-  //       "num2": 3
-  //     },
-  //     "responseType": "arraybuffer",
-  //     success: (res) => {
-  //       console.log(res.data.result);
-  //       that.setData({
-  //         test1 : res.data.result
-  //       });
-  //       console.log(this.data.test1);
-  //     }
-  
-  //   });
-  //   console.log(this.data.test1);
-  //   // debugger;
-  //   // console.log(result);
-  //   // debugger;
-  //   // let test1 = ret;
-
-  //   // wx.showToast({
-  //   //           title: `"${test1}"`,
-  //   //           icon: 'success',
-  //   //           duration: 2000
-  //   //         });
-  // },
-
 
   inputTextChange(e) {
     this.setData({
