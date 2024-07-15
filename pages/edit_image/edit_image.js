@@ -2,14 +2,21 @@ Page({
   data: {
     imageSrc: '',
     inputText: '',
-    styles: ['Original', 'Grayscale', 'Sepia', '黑白'],
+    styles: ['Original', 'Grayscale', 'Sepia', '黑白', '人物抠图', '漫画'],
     selectedStyle: 'Original',
     canvasWidth: 0,
     canvasHeight: 0,
     baseImg: '',
-    test1: '1'
+    test1: '1',
+    display_scroll: false
   },
-  
+  onShow(){
+    if (typeof this.getTabBar === 'function' && this.getTabBar()){
+      this.getTabBar().setData({
+        selected: 2
+      })
+    }
+  },
   chooseImage() {
     const that = this;
     wx.chooseImage({
@@ -164,22 +171,38 @@ Page({
       });
       return;
     }
-    wx.downloadFile({    //  下载图片到本地
-      url: this.data.imageSrc,    //  下载的图片地址
-        success(res) {
-          if (res.statusCode === 200) {
-            wx.saveImageToPhotosAlbum({      //  保存到系统相册
-              filePath: res.tempFilePath,       //   图片图片地址
-              success(res) {
-                wx.showToast({
-                  title: 'Image saved!',
-                  icon: 'success',
-                  duration: 2000
-                })
-              }
-            })
-          }
-        }
-      })
+
+    wx.saveImageToPhotosAlbum({
+      filePath: imageSrc,
+      success() {
+        wx.showToast({
+          title: 'Image saved!',
+          icon: 'success',
+          duration: 2000
+        });
+      },
+      fail() {
+        console.log(err)
+        wx.showToast({
+          title: 'Save failed',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
   },
+  hide_scroll(e){
+    setTimeout(function (){
+      this.setData({
+        display_scroll: false
+      })
+    }.bind(this), )
+  },
+  show_scroll(e){
+    setTimeout(function (){
+      this.setData({
+        display_scroll: true
+      })
+    }.bind(this), )
+  }
 });

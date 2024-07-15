@@ -4,9 +4,26 @@
     "pages/index/index",
     "pages/logs/logs"
   ],
+  "tabBar": {
+    "custom": true,
+    "color": "#000000",
+    "selectedColor": "#000000",
+    "backgroundColor": "#654321",
+    "list": [
+      {
+        "pagePath": "pages/index/index", 
+        "text": "Home"
+      },
+      {
+        "pagePath": "pages/edit_image/edit_image",
+        "text": "edit_image"
+      }
+    ]
+  },
+  "usingComponents": {},
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "Test_name",
     "navigationBarBackgroundColor": "#ffffff"
   },
   "style": "v2",

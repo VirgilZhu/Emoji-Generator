@@ -12,6 +12,13 @@ Page({
     canIUseGetUserProfile: wx.canIUse('getUserProfile'),
     canIUseNicknameComp: wx.canIUse('input.type.nickname'),
   },
+  onShow(){
+    if (typeof this.getTabBar === 'function' && this.getTabBar()){
+      this.getTabBar().setData({
+        selected: 0
+      })
+    }
+  },
   bindViewTap() {
     wx.navigateTo({
       url: '../logs/logs'

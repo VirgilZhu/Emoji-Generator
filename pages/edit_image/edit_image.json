@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "图片编辑"
+  "navigationBarTitleText": "表情包生成器",
+  "usingComponents": {"tab-bar": "/custom-tab-bar/index"}
 }
