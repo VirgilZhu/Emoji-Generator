@@ -17,10 +17,10 @@
       样式: {{selectedStyle}}
       </view>
     </picker>
-
-    <textarea placeholder="Enter text" bindinput="inputTextChange" class="input-text"></textarea>
+    <!-- <textarea placeholder="Enter text" bindinput="inputTextChange" class="input-text"></textarea> -->
     <button class="green-button" bindtap="applyText">Add Text</button>
     <button class="green-button" bindtap="upCont">测试</button>
     <canvas canvas-id="myCanvas" style="display:none;" width="{{canvasWidth}}" height="{{canvasHeight}}"></canvas>
+
   </view>
 </view>

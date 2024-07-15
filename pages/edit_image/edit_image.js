@@ -2,14 +2,21 @@ Page({
   data: {
     imageSrc: '',
     inputText: '',
-    styles: ['Original', 'Grayscale', 'Sepia', '黑白'],
+    styles: ['Original', 'Grayscale', 'Sepia', '黑白', '人物抠图', '漫画'],
     selectedStyle: 'Original',
     canvasWidth: 0,
     canvasHeight: 0,
     baseImg: '',
-    test1: '1'
+    test1: '1',
+    display_scroll: false
   },
-  
+  onShow(){
+    if (typeof this.getTabBar === 'function' && this.getTabBar()){
+      this.getTabBar().setData({
+        selected: 2
+      })
+    }
+  },
   chooseImage() {
     const that = this;
     wx.chooseImage({
@@ -197,5 +204,19 @@ Page({
         });
       }
     });
+  },
+  hide_scroll(e){
+    setTimeout(function (){
+      this.setData({
+        display_scroll: false
+      })
+    }.bind(this), )
+  },
+  show_scroll(e){
+    setTimeout(function (){
+      this.setData({
+        display_scroll: true
+      })
+    }.bind(this), )
   }
 });

@@ -5,13 +5,14 @@
 }
 
 .preview-image {
-  width: 100%;
+  width: 80%;
   max-width: 300px;
-  margin-top: 20px;
+  margin-bottom: 0;
+  padding: 0;
 }
 
 .picker {
-  margin-top: 20px;
+  /* margin-top: 20px; */
   padding: 10px;
   background-color: rgb(158, 204, 51);
   color: white;
