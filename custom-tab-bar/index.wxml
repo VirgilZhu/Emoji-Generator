@@ -1,5 +1,6 @@
 <!--miniprogram/custom-tab-bar/index.wxml-->
 <view class="tabbar-box">
+  <!-- <view class="active-tabbar-box" style="--i:{{currIndex}}"></view> -->
   <block wx:for="{{menu}}" wx:key="list">
     <view class="menu-item {{currIndex==index && 'active'}}" catchtap="tabClick" data-index="{{index}}">
       <view class="iconfont {{item.icon}}"></view>

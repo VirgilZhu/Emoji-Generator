@@ -16,7 +16,7 @@ Component({
   attached(){
   },
   methods:{
-    tabClick(e) {
+    async tabClick(e) {
       let {
         index
       } = e.currentTarget.dataset;
@@ -26,9 +26,9 @@ Component({
           currIndex: index,
         }, () => {
           let pagePath = this.data.menu[index].pagePath;
-          // wx.switchTab({
-          //   url: pagePath,
-          // });
+          wx.switchTab({
+            url: pagePath,
+          });
         })
       }
 

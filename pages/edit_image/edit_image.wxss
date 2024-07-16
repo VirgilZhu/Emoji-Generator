@@ -110,3 +110,23 @@
   background-color: #45a049; /* 悬停时的背景色 */
 }
 
+.style-select {
+  display: flex;
+  overflow: hidden;
+  white-space:nowrap;
+}
+
+.select-item{
+  width:200rpx;
+  height: 100rpx;
+  display: inline-block;
+  background-color: rgb(244, 245, 245);
+}
+
+.selectpng{
+  width: 80rpx;
+  height: 80rpx;
+  position: relative;
+  left: 8px; 
+  top: 4px;
+}

@@ -1,19 +1,22 @@
 Page({
   data: {
     imageSrc: '',
+    originSrc: '',
     inputText: '',
-    styles: ['Original', 'Grayscale', 'Sepia', '黑白', '人物抠图', '漫画'],
+    styles: ['Original', 'Grayscale', '生命历程', '黑白', '人物抠图', '漫画'],
     selectedStyle: 'Original',
     canvasWidth: 0,
     canvasHeight: 0,
     baseImg: '',
     test1: '1',
-    display_scroll: false
+    display_scroll: false,
+    isHidden: true,
+    count: '0'
   },
   onShow(){
     if (typeof this.getTabBar === 'function' && this.getTabBar()){
       this.getTabBar().setData({
-        selected: 2
+        currIndex: 1
       })
     }
   },
@@ -30,8 +33,10 @@ Page({
           success(imageInfo) {
             that.setData({
               imageSrc: tempFilePaths[0],
+              originSrc: tempFilePaths[0],
               canvasWidth: imageInfo.width,
-              canvasHeight: imageInfo.height
+              canvasHeight: imageInfo.height,
+              isHidden: false
             });
           }
         });
@@ -56,7 +61,7 @@ Page({
 
   upCont: function () {
     const that = this;
-    let base64 = wx.getFileSystemManager().readFileSync(this.data.imageSrc, 'base64');
+    let base64 = wx.getFileSystemManager().readFileSync(this.data.originSrc, 'base64');
     
     wx.request({
         url: "http://39.105.8.203/graywordmeme",
@@ -107,37 +112,90 @@ Page({
   },
 
 
-  test: function (baseImg, inputTest){
+  always_test: function (){
     const that = this;
-    // debugger;
+    let base64 = wx.getFileSystemManager().readFileSync(this.data.originSrc, 'base64');
+    const type = this.data.selectedStyle;
     wx.request({
-      url: "https://emoji-generator-114452-5-1327830118.sh.run.tcloudbase.com/add",
-      data: {
-        num1: 100,
-        num2: 200
-      },
-      header:{
-        'Content-Type':'application/json'
-      },
-      method: "POST",
-      "responseType": "arraybuffer",
-      success:(res) => {
-        // data.test = res;
-        let test1 = res;
-        debugger;
-        wx.showToast({
-          title: `"${test1}"`,
-          icon: 'success',
-          duration: 2000
-        });
-      },
-      fail:function(err) {
-        debugger;
-        wx.showLoading({
-          title: `"${err}"`
-        });
-      }
-    })
+        // url: "http://39.105.8.203/" + type,
+        url: "http://127.0.0.1:5000/" + type,
+        method: "POST",
+        data: {
+            img: base64
+        },
+        header: {
+            'Content-Type': 'application/json'
+        },
+        success: (res) => {
+            let base64Data = res.data.result;
+            let count = this.data.count;
+            let filePath = `${wx.env.USER_DATA_PATH}/modified_image${count}.png`; // 保存图像到小程序的用户数据路径
+            console.log(filePath);
+            this.setData({
+              count: parseInt(count) ^ 1
+            })
+            console.log(count)
+            let oldFilePath = `${wx.env.USER_DATA_PATH}/modified_image${(count ^ 1)}.png`; // 注意路径 
+            console.log(oldFilePath);
+            const fs = wx.getFileSystemManager()
+            // 判断文件/目录是否存在
+            fs.access({
+              path: oldFilePath,
+              success(res) {
+                // 文件存在
+                console.log(res)
+                const fs = wx.getFileSystemManager()
+                fs.unlink({
+                  filePath: oldFilePath,
+                  success(res) {
+                    console.log(res)
+                  },
+                  fail(res) {
+                    console.error(res)
+                  }
+                })
+              }
+            })
+            
+            // Convert base64 to ArrayBuffer manually
+            let binaryString = atob (base64Data); // Decode base64 to binary string
+            let len = binaryString.length;
+            let buffer = new ArrayBuffer(len);
+            let view = new Uint8Array(buffer);
+            for (let i = 0; i < len; i++) {
+                view[i] = binaryString.charCodeAt(i);
+            }
+
+            wx.getFileSystemManager().writeFile({
+                filePath: filePath,
+                data: buffer,
+                encoding: 'binary',
+                success: () => {
+                    that.setData({
+                        imageSrc: filePath, // 更新 imageSrc 为本地文件路径
+                    });
+                    wx.showToast({
+                        title: 'Image modified successfully!',
+                        icon: 'success',
+                        duration: 2000
+                    });
+                },
+                fail: (err) => {
+                    console.error('Failed to save modified image:', err);
+                }
+            });
+        },
+        fail: (err) => {
+            console.error('Request failed:', err);
+        }
+    });
+  },
+  style_select(e) {
+    const type = e.currentTarget.dataset.type; 
+    this.setData({
+      selectedStyle: type
+    });
+    console.log(this.data.selectedStyle)
   },
 
   inputTextChange(e) {
