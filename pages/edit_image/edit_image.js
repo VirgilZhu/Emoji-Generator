@@ -17,7 +17,7 @@ Page({
     if (typeof this.getTabBar === 'function' && this.getTabBar()){
       this.getTabBar().setData({
         currIndex: 1
-      })
+      });
     }
   },
   chooseImage() {
@@ -46,156 +46,171 @@ Page({
 
   conversionAddress() {
     const that = this;
-    wx.getFileSystemManager().readFile(
-      {
-        filePath: that.data.imageSrc,
-        encoding: "base64",
-        success: function(res) {
-          // that.data.baseImg.push('data:image/png;base64,' + res.data);
-          that.upCont(that.data.inputText, that.data.baseImg);
-        }
-
+    wx.getFileSystemManager().readFile({
+      filePath: that.data.imageSrc,
+      encoding: "base64",
+      success: function(res) {
+        that.upCont(that.data.inputText, that.data.baseImg);
       }
-    )
+    });
   },
 
   upCont: function () {
     const that = this;
-    let base64 = wx.getFileSystemManager().readFileSync(this.data.originSrc, 'base64');
+    const fs = wx.getFileSystemManager();
+    let base64 = fs.readFileSync(this.data.originSrc, 'base64');
     
     wx.request({
-        url: "http://39.105.8.203/graywordmeme",
-        method: "POST",
-        data: {
-            img: base64,
-            text: this.data.inputText
-        },
-        header: {
-            'Content-Type': 'application/json'
-        },
-        success: (res) => {
-            let base64Data = res.data.result;
-            let filePath = `${wx.env.USER_DATA_PATH}/modified_image.png`; // 保存图像到小程序的用户数据路径
+      url: "https://39.105.8.203/graywordmeme", // 使用 HTTPS
+      method: "POST",
+      data: {
+        img: base64,
+        text: this.data.inputText
+      },
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: (res) => {
+        console.log('Request succeeded:', res);
+        let base64Data = res.data.result;
 
-            // Convert base64 to ArrayBuffer manually
-            let binaryString = atob (base64Data); // Decode base64 to binary string
-            let len = binaryString.length;
-            let buffer = new ArrayBuffer(len);
-            let view = new Uint8Array(buffer);
-            for (let i = 0; i < len; i++) {
-                view[i] = binaryString.charCodeAt(i);
-            }
-
-            wx.getFileSystemManager().writeFile({
-                filePath: filePath,
-                data: buffer,
-                encoding: 'binary',
-                success: () => {
-                    that.setData({
-                        imageSrc: filePath, // 更新 imageSrc 为本地文件路径
-                    });
-                    wx.showToast({
-                        title: 'Image modified successfully!',
-                        icon: 'success',
-                        duration: 2000
-                    });
-                },
-                fail: (err) => {
-                    console.error('Failed to save modified image:', err);
-                }
-            });
-        },
-        fail: (err) => {
-            console.error('Request failed:', err);
+        // 检查 base64Data 是否为有效的 Base64 字符串
+        if (!base64Data || !/^[A-Za-z0-9+/=]+$/.test(base64Data)) {
+          console.error('Invalid Base64 string:', base64Data);
+          wx.showToast({
+            title: 'Invalid Base64 data',
+            icon: 'error',
+            duration: 2000
+          });
+          return;
         }
+
+        let filePath = `${wx.env.USER_DATA_PATH}/modified_image.png`;
+
+        // 使用 wx.base64ToArrayBuffer 将 base64 编码的数据转换为 ArrayBuffer
+        let buffer = wx.base64ToArrayBuffer(base64Data);
+
+        fs.writeFile({
+          filePath: filePath,
+          data: buffer,
+          encoding: 'binary',
+          success: () => {
+            that.setData({
+              imageSrc: filePath,
+            });
+            wx.showToast({
+              title: 'Image modified successfully!',
+              icon: 'success',
+              duration: 2000
+            });
+          },
+          fail: (err) => {
+            console.error('Failed to save modified image:', err);
+          }
+        });
+      },
+      fail: (err) => {
+        console.error('Request failed:', err);
+        wx.showToast({
+          title: 'Request failed',
+          icon: 'error',
+          duration: 2000
+        });
+      }
     });
   },
 
-
-  always_test: function (){
+  always_test: function () {
     const that = this;
-    let base64 = wx.getFileSystemManager().readFileSync(this.data.originSrc, 'base64');
+    const fs = wx.getFileSystemManager();
+    let base64 = fs.readFileSync(this.data.originSrc, 'base64');
     const type = this.data.selectedStyle;
+    
     wx.request({
-        // url: "http://39.105.8.203/" + type,
-        url: "http://127.0.0.1:5000/" + type,
-        method: "POST",
-        data: {
-            img: base64
-        },
-        header: {
-            'Content-Type': 'application/json'
-        },
-        success: (res) => {
-            let base64Data = res.data.result;
-            let count = this.data.count;
-            let filePath = `${wx.env.USER_DATA_PATH}/modified_image${count}.png`; // 保存图像到小程序的用户数据路径
-            console.log(filePath);
-            this.setData({
-              count: parseInt(count) ^ 1
-            })
-            console.log(count)
-            let oldFilePath = `${wx.env.USER_DATA_PATH}/modified_image${(count ^ 1)}.png`; // 注意路径 
-            console.log(oldFilePath);
-            const fs = wx.getFileSystemManager()
-            // 判断文件/目录是否存在
-            fs.access({
-              path: oldFilePath,
-              success(res) {
-                // 文件存在
-                console.log(res)
-                const fs = wx.getFileSystemManager()
-                fs.unlink({
-                  filePath: oldFilePath,
-                  success(res) {
-                    console.log(res)
-                  },
-                  fail(res) {
-                    console.error(res)
-                  }
-                })
-              }
-            })
-            
-            // Convert base64 to ArrayBuffer manually
-            let binaryString = atob (base64Data); // Decode base64 to binary string
-            let len = binaryString.length;
-            let buffer = new ArrayBuffer(len);
-            let view = new Uint8Array(buffer);
-            for (let i = 0; i < len; i++) {
-                view[i] = binaryString.charCodeAt(i);
-            }
+      url: "http://39.105.8.203/" + type,
+      method: "POST",
+      data: {
+        img: base64
+      },
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: (res) => {
+        let base64Data = res.data.result;
 
-            wx.getFileSystemManager().writeFile({
-                filePath: filePath,
-                data: buffer,
-                encoding: 'binary',
-                success: () => {
-                    that.setData({
-                        imageSrc: filePath, // 更新 imageSrc 为本地文件路径
-                    });
-                    wx.showToast({
-                        title: 'Image modified successfully!',
-                        icon: 'success',
-                        duration: 2000
-                    });
-                },
-                fail: (err) => {
-                    console.error('Failed to save modified image:', err);
-                }
-            });
-        },
-        fail: (err) => {
-            console.error('Request failed:', err);
+        // 检查 base64Data 是否为有效的 Base64 字符串
+        if (!base64Data || !/^[A-Za-z0-9+/=]+$/.test(base64Data)) {
+          console.error('Invalid Base64 string:', base64Data);
+          wx.showToast({
+            title: 'Invalid Base64 data',
+            icon: 'error',
+            duration: 2000
+          });
+          return;
         }
+
+        let count = this.data.count;
+        let filePath = `${wx.env.USER_DATA_PATH}/modified_image${count}.png`; // 保存图像到小程序的用户数据路径
+        console.log(filePath);
+        this.setData({
+          count: parseInt(count) ^ 1
+        });
+        console.log(count);
+        let oldFilePath = `${wx.env.USER_DATA_PATH}/modified_image${(count ^ 1)}.png`; // 注意路径 
+        console.log(oldFilePath);
+        
+        // 判断文件/目录是否存在
+        fs.access({
+          path: oldFilePath,
+          success(res) {
+            // 文件存在
+            console.log(res);
+            fs.unlink({
+              filePath: oldFilePath,
+              success(res) {
+                console.log(res);
+              },
+              fail(res) {
+                console.error(res);
+              }
+            });
+          }
+        });
+        
+        // 使用 wx.base64ToArrayBuffer 将 base64 编码的数据转换为 ArrayBuffer
+        let buffer = wx.base64ToArrayBuffer(base64Data);
+
+        fs.writeFile({
+          filePath: filePath,
+          data: buffer,
+          encoding: 'binary',
+          success: () => {
+            that.setData({
+              imageSrc: filePath, // 更新 imageSrc 为本地文件路径
+            });
+            wx.showToast({
+              title: 'Image modified successfully!',
+              icon: 'success',
+              duration: 2000
+            });
+          },
+          fail: (err) => {
+            console.error('Failed to save modified image:', err);
+          }
+        });
+      },
+      fail: (err) => {
+        console.error('Request failed:', err);
+      }
     });
   },
+
   style_select(e) {
     const type = e.currentTarget.dataset.type; 
     this.setData({
       selectedStyle: type
     });
-    console.log(this.data.selectedStyle)
+    console.log(this.data.selectedStyle);
   },
 
   inputTextChange(e) {
@@ -239,8 +254,8 @@ Page({
           duration: 2000
         });
       },
-      fail() {
-        console.log(err)
+      fail(err) {
+        console.log(err);
         wx.showToast({
           title: 'Save failed',
           icon: 'none',
@@ -249,18 +264,20 @@ Page({
       }
     });
   },
-  hide_scroll(e){
-    setTimeout(function (){
+
+  hide_scroll(e) {
+    setTimeout(function () {
       this.setData({
         display_scroll: false
-      })
-    }.bind(this), )
+      });
+    }.bind(this), 0);
   },
-  show_scroll(e){
-    setTimeout(function (){
+
+  show_scroll(e) {
+    setTimeout(function () {
       this.setData({
         display_scroll: true
-      })
-    }.bind(this), )
+      });
+    }.bind(this), 0);
   }
 });
