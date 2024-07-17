@@ -63,7 +63,7 @@ Page({
     const that = this;
     let base64 = wx.getFileSystemManager().readFileSync(this.data.originSrc, 'base64');
     
-    wx.request({
+    wx.vrequest({
         url: "http://39.105.8.203/graywordmeme",
         method: "POST",
         data: {
@@ -116,9 +116,9 @@ Page({
     const that = this;
     let base64 = wx.getFileSystemManager().readFileSync(this.data.originSrc, 'base64');
     const type = this.data.selectedStyle;
-    wx.request({
-        // url: "http://39.105.8.203/" + type,
-        url: "http://127.0.0.1:5000/" + type,
+    wx.vrequest({
+        url: "http://39.105.8.203/" + type,
+        // url: "http://127.0.0.1:5000/" + type,
         method: "POST",
         data: {
             img: base64

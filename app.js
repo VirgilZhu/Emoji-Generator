@@ -1,7 +1,11 @@
 // app.js
+require('./utils/v-request.js');
+
 App({
   onLaunch() {
-    wx.cloud.init()
+    wx.cloud.init({
+      env: "cloud1-4ghvvksf319af77b"
+    })
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
