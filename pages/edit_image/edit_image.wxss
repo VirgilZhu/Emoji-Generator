@@ -30,8 +30,8 @@
 
 .input-text {
   width: 100%;
-  max-width: 300px;
-  height: 100px;
+  max-width: 360px;
+  height: 50px;
   margin-top: 20px;
   padding: 10px;
   border: 1px solid #ddd;
@@ -117,16 +117,16 @@
 }
 
 .select-item{
-  width:200rpx;
-  height: 100rpx;
+  width:160rpx;
+  height: 150rpx;
   display: inline-block;
   background-color: rgb(244, 245, 245);
 }
 
 .selectpng{
-  width: 80rpx;
-  height: 80rpx;
+  width: 150rpx;
+  height: 150rpx;
   position: relative;
-  left: 8px; 
-  top: 4px;
+  left: 5px; 
+  top: 0px;
 }

@@ -13,34 +13,35 @@
   <scroll-view hidden="{{isHidden}}" class="style-select"  scroll-x >
   <view class="select-item">
     <image data-type="graywordmeme"  bind:tap="style_select" class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
+    <text></text>
   </view>
   <view class="select-item">
-    <image data-type="always"  bind:tap="style_select" class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
+    <image data-type="always"  bind:tap="style_select" class="selectpng" src='./image/always.png' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="fightsunuo"  bind:tap="style_select" class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
+    <image data-type="fightsunuo"  bind:tap="style_select" class="selectpng" src='./image/fightsunuo.jpg' alt="Upload Icon"></image>
+  </view>
+  <view class="select-item">
+    <image data-type="animegen_gqj"  bind:tap="style_select" class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
+  </view>
+  <view class="select-item">
+    <image data-type="animegen_xhc"  bind:tap="style_select" class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
+  </view>
+  <view class="select-item">
+    <image data-type="animegen_rbf"  bind:tap="style_select" class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
+  </view>
+  <view class="select-item">
+    <image data-type="animegen_smf"  bind:tap="style_select" class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
     <image class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
   </view>
-  <view class="select-item">
-    <image class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
-  </view>
-  <view class="select-item">
-    <image class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
-  </view>
-  <view class="select-item">
-    <image class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
-  </view>
-  <view class="select-item">
-    <image class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
-  </view>
-  <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: red;'></view>
+  <!-- <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: red;'></view>
   <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: blue;'></view>
   <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: green;'></view>
   <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: orange;'></view>
   <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: yellow;'></view>
-  <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: black;'></view>
+  <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: black;'></view> -->
   </scroll-view>
   <view wx:if="{{imageSrc}}">
     <!-- <scroll-view  class="style-select"  scroll-x="true" >
@@ -56,7 +57,7 @@
       样式: {{selectedStyle}}
       </view>
     </picker>
-    <!-- <textarea placeholder="Enter text" bindinput="inputTextChange" class="input-text"></textarea> -->
+    <textarea placeholder="Enter text" bindinput="inputTextChange" class="input-text"></textarea>
     <button class="green-button" bindtap="applyText">Add Text</button>
     <button class="green-button" bindtap="always_test">测试</button>
     <canvas canvas-id="myCanvas" style="display:none;" width="{{canvasWidth}}" height="{{canvasHeight}}"></canvas>

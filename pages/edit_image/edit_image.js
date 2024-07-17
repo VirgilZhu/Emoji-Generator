@@ -125,29 +125,80 @@ Page({
     const fs = wx.getFileSystemManager();
     let base64 = fs.readFileSync(this.data.originSrc, 'base64');
     const type = this.data.selectedStyle;
+    let requestPayload = {};
+    let requestType = type;
+    switch (type) {
+        case 'graywordmeme':
+            requestPayload = {
+                img: base64,
+                text: this.data.inputText
+            };
+            break;
+        case 'always':
+            requestPayload = {
+                img: base64
+            };
+            break;
+        case 'fightsunuo':
+            requestPayload = {
+                img: base64
+            };
+            break;
+        case 'animegen_gqj':
+            requestPayload = {
+                img: base64,
+                type: "宫崎骏"
+            };
+            requestType = "animegen";
+            break;
+        case 'animegen_xhc':
+            requestPayload = {
+                img: base64,
+                type: "新海诚"
+            };
+            requestType = "animegen";
+            break;
+        case 'animegen_rbf':
+            requestPayload = {
+                img: base64,
+                type: "日本风头像"
+              };
+              requestType = "animegen";
+              break;
+        case 'animegen_smf':
+            requestPayload = {
+                img: base64,
+                type: "素描风头像"
+            };
+            requestType = "animegen";
+            break;
+        default:
+            requestPayload = { img: base64 }; // 默认情况下只发送图片
+            break;
+    }
     
     wx.request({
-      url: "http://39.105.8.203/" + type,
+      // url: "http://39.105.8.203/" + requestType,
+      url: "http://127.0.0.1:5000/" + requestType,
       method: "POST",
-      data: {
-        img: base64
-      },
+      data: requestPayload,
       header: {
         'Content-Type': 'application/json'
       },
       success: (res) => {
         let base64Data = res.data.result;
+        console.log(res)
 
         // 检查 base64Data 是否为有效的 Base64 字符串
-        if (!base64Data || !/^[A-Za-z0-9+/=]+$/.test(base64Data)) {
-          console.error('Invalid Base64 string:', base64Data);
-          wx.showToast({
-            title: 'Invalid Base64 data',
-            icon: 'error',
-            duration: 2000
-          });
-          return;
-        }
+        // if (!base64Data || !/^[A-Za-z0-9+/=]+$/.test(base64Data)) {
+        //   console.error('Invalid Base64 string:', base64Data);
+        //   wx.showToast({
+        //     title: 'Invalid Base64 data',
+        //     icon: 'error',
+        //     duration: 2000
+        //   });
+        //   return;
+        // }
 
         let count = this.data.count;
         let filePath = `${wx.env.USER_DATA_PATH}/modified_image${count}.png`; // 保存图像到小程序的用户数据路径
