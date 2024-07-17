@@ -161,16 +161,21 @@ Page({
         case 'animegen_rbf':
             requestPayload = {
                 img: base64,
-                type: "日本风头像"
+                type: "日本风肖像"
               };
               requestType = "animegen";
               break;
         case 'animegen_smf':
             requestPayload = {
                 img: base64,
-                type: "素描风头像"
+                type: "素描风肖像"
             };
             requestType = "animegen";
+            break;
+        case 'bodysegment':
+            requestPayload = {
+                img: base64
+            };
             break;
         default:
             requestPayload = { img: base64 }; // 默认情况下只发送图片
@@ -187,7 +192,7 @@ Page({
       },
       success: (res) => {
         let base64Data = res.data.result;
-        console.log(res)
+        console.log(res.data.msg)
 
         // 检查 base64Data 是否为有效的 Base64 字符串
         // if (!base64Data || !/^[A-Za-z0-9+/=]+$/.test(base64Data)) {
@@ -204,10 +209,10 @@ Page({
         let filePath = `${wx.env.USER_DATA_PATH}/modified_image${count}.png`; // 保存图像到小程序的用户数据路径
         console.log(filePath);
         this.setData({
-          count: parseInt(count) ^ 1
+          count: parseInt(count) + 1
         });
         console.log(count);
-        let oldFilePath = `${wx.env.USER_DATA_PATH}/modified_image${(count ^ 1)}.png`; // 注意路径 
+        let oldFilePath = `${wx.env.USER_DATA_PATH}/modified_image${(parseInt(count) - 1)}.png`; // 注意路径 
         console.log(oldFilePath);
         
         // 判断文件/目录是否存在

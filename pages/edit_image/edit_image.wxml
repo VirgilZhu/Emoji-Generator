@@ -22,19 +22,19 @@
     <image data-type="fightsunuo"  bind:tap="style_select" class="selectpng" src='./image/fightsunuo.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_gqj"  bind:tap="style_select" class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
+    <image data-type="animegen_gqj"  bind:tap="style_select" class="selectpng" src='./image/animegen_gqj.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_xhc"  bind:tap="style_select" class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
+    <image data-type="animegen_xhc"  bind:tap="style_select" class="selectpng" src='./image/animegen_xhc.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_rbf"  bind:tap="style_select" class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
+    <image data-type="animegen_rbf"  bind:tap="style_select" class="selectpng" src='./image/animegen_rbf.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_smf"  bind:tap="style_select" class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
+    <image data-type="animegen_smf"  bind:tap="style_select" class="selectpng" src='./image/animegen_smf.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
+    <image data-type="bodysegment"  bind:tap="style_select" class="selectpng" src='./image/bodysegment.jpg' alt="Upload Icon"></image>
   </view>
   <!-- <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: red;'></view>
   <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: blue;'></view>
