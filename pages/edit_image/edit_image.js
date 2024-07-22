@@ -183,8 +183,8 @@ Page({
     }
     
     wx.request({
-      // url: "http://39.105.8.203/" + requestType,
-      url: "http://127.0.0.1:5000/" + requestType,
+      url: "http://39.105.8.203/" + requestType,
+      // url: "http://127.0.0.1:5000/" + requestType,
       method: "POST",
       data: requestPayload,
       header: {
