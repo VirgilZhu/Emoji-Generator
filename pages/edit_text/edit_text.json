@@ -1,4 +1,4 @@
 {
   "navigationBarTitleText": "Edit Text",
-  "usingComponents": {}
+  "usingComponents": {"tab-bar": "/custom-tab-bar/index"}
 }

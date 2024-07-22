@@ -1,14 +1,18 @@
-<view class="container">
+<view class="container" wx:if="{{page==='mainPage'}}">
   <button style="width:25vw" class="btnUpload" bindtap="chooseImage">
     <image class="btnUploadImg" src='./image/upload.png' alt="Upload Icon"></image>
     <view>上传</view>
+  </button>
+  <button style="width:25vw" class="btnCut" bindtap="startCrop">
+    <image class="btnUploadImg" src='./image/upload.png' alt="Upload Icon"></image>
+    <view>裁剪</view>
   </button>
   <button style="width:25vw" class="btnSaved" bindtap="saveImage" disabled="{{!imageSrc}}">
     <image class="btnSaveImg" src='./image/save.png' alt="Upload Icon"></image>
     <view>保存</view>
   </button>
 
-  <image src="{{imageSrc || './image/cam.webp'}}" mode="aspectFit" class="preview-image {{selectedStyle}}"></image>
+  <image id="myImage" src="{{imageSrc || './image/cam.webp'}}" mode="aspectFit" class="preview-image {{selectedStyle}}"></image>
 
   <scroll-view hidden="{{isHidden}}" class="style-select"  scroll-x >
   <view class="select-item">
@@ -63,4 +67,34 @@
     <canvas canvas-id="myCanvas" style="display:none;" width="{{canvasWidth}}" height="{{canvasHeight}}"></canvas>
 
   </view>
-</view>
+  </view>
+<!-- 裁剪功能 -->
+<view  id="parentContainer" class="container" wx:if="{{page==='cropPage'}}" >
+   <!-- 隐藏canvas 保存图片用 -->
+   <canvas canvas-id="tempCanvas" disable-scroll="true" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px; position:absolute;left:-999999px"></canvas>
+  <!-- <button style="width:25vw" class="btnUpload" bindtap="chooseImage">
+    <image class="btnUploadImg" src='./image/upload.png' alt="Upload Icon"></image>
+    <view>上传</view>
+  </button> -->
+    <image id="myImage" src="{{imageSrc||'./image/cam.webp'}}" mode="widthFix" class="image-responsive" ></image>
+    <view wx:if="{{isCroper}}" class="cropper-wraper">
+      <view class="corpper-view-box" bindtouchstart="croperStart" bindtouchmove="croperMove" style="width:{{cutW}}px;height:{{cutH}}px;left:{{cutL}}px;top:{{cutT}}px">
+        <view class="cropper-dashed-h"></view>
+        <view class="cropper-dashed-v"></view>
+        <view class="cropper-line-t" data-drag="top"></view>
+        <view class="cropper-line-r" data-drag="right"></view>
+        <view class="cropper-line-b" data-drag="bottom"></view>
+        <view class="cropper-line-l" data-drag="left"></view>
+        <view class="cropper-point point-tr" data-drag="topTight"></view>
+        <view class="cropper-point point-rb" data-drag="rightBottom" catchtouchstart="dragPointStart" catchtouchmove="dragPointMove"></view>
+        <view class="cropper-point point-bl" data-drag="bottomLeft"></view>
+        <view class="cropper-point point-lt" data-drag="leftTop"></view>
+      </view>
+    </view>
+    <view class="confirm-bar1" >
+    <text class="icon-cross" bindtap="cancelCrop"></text>
+      </view>
+    <view class="confirm-bar2" >
+      <text class="icon-checkmark" bindtap="competeCrop"></text>
+      </view>
+  </view>

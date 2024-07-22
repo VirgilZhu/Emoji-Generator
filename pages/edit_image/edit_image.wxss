@@ -1,14 +1,29 @@
 .container {
-  position: relative;
+  position: fixed;
   width: 100%;
   height: 100vh;
+  overflow: hidden;
+}
+
+.imageView{
+  width:750rpx;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .preview-image {
   width: 80%;
   max-width: 300px;
   margin-bottom: 0;
-  padding: 0;
+}
+
+.image-responsive {
+  width: 100%;
+  /* height: auto; */
+  /* max-width: 370px; */
+  max-height: 500px;
+  margin-bottom: 0;
 }
 
 .picker {
@@ -44,6 +59,21 @@
   position: absolute;
   top: 0%; 
   left: 3%; 
+  width: 80%;
+  margin-top: 20rpx;
+  /* background-color: rgb(173, 214, 76); */
+  background: linear-gradient(132deg, #1A8DEB -7%, rgba(47, 50, 232, 0.6728) 32%, rgba(25, 27, 185, 0.3338) 66%, rgba(255, 255, 255, 0) 100%);
+  color: white;
+  border-radius: 98rpx;
+  display: flex;
+  flex-direction: row;
+  padding-left: 38px; 
+  justify-content: center;
+}
+.btnCut {
+  position: absolute;
+  top: 0%; 
+  left: 40%; 
   width: 80%;
   margin-top: 20rpx;
   /* background-color: rgb(173, 214, 76); */
@@ -129,4 +159,168 @@
   position: relative;
   left: 5px; 
   top: 0px;
+}
+
+.corpper-view-box{
+  position: absolute;
+  z-index: 2;
+  box-shadow: 0 0 0 9999px rgba(204,204,204,0.8);
+}
+
+/* 横向虚线 */
+.cropper-dashed-h{
+  position: absolute;
+  top: 33.33333333%;
+  left: 0;
+  width: 100%;
+  height: 33.33333333%;
+  border-top: 1px dashed rgba(255,255,255,0.5);
+  border-bottom: 1px dashed rgba(255,255,255,0.5);
+}
+
+/* 纵向虚线 */
+.cropper-dashed-v{
+  position: absolute;
+  left: 33.33333333%;
+  top: 0;
+  width: 33.33333333%;
+  height: 100%;
+  border-left: 1px dashed rgba(255,255,255,0.5);
+  border-right: 1px dashed rgba(255,255,255,0.5);
+}
+/* 四个方向的线  为了之后的拖动事件*/
+.cropper-line-t{
+  position: absolute;
+  display: block;
+  width: 100%;
+  background-color: #69f;
+  top: 0;
+  left: 0;
+  height: 1px;
+  opacity: 0.1;
+}
+.cropper-line-r{
+  position: absolute;
+  display: block;
+  background-color: #69f;
+  top: 0;
+  right: 0px;
+  width: 1px;
+  opacity: 0.1;
+  height: 100%;
+}
+.cropper-line-b{
+  position: absolute;
+  display: block;
+  width: 100%;
+  background-color: #69f;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  opacity: 0.1;
+}
+.cropper-line-l{
+  position: absolute;
+  display: block;
+  background-color: #69f;
+  top: 0;
+  left: 0;
+  width: 1px;
+  opacity: 0.1;
+  height: 100%;
+}
+/* 剪裁框的点 */
+.cropper-point{
+  width: 5px;
+  height: 5px;
+  background-color: #69f;
+  opacity: .75;
+  position: absolute;
+  z-index: 3;
+}
+.point-tr{
+  top: -3px;
+  left: 100%;
+  margin-left: -3px;
+}
+.point-rb{
+  left: 100%;
+  top: 100%;
+  transform: translate3d(-50%,-50%,0);
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background-color: #69f;
+  position: absolute;
+  z-index: 3;
+  opacity: 1;
+}
+.point-bl{
+  left:0%;
+  top: 100%;
+  margin-left: -3px;
+  margin-top: -3px;
+}
+.point-lt{
+  left:0%;
+  top: 0%;
+  margin-left: -3px;
+  margin-top: -3px;
+}
+.cropper-wraper{
+position: absolute;
+width:100%;
+height:100%;
+background-color: transparent;
+}
+
+.confirm-bar1{
+  position:absolute;
+  top:100rpx;
+  left:40rpx;
+  width:60rpx;
+  height:60rpx;
+  z-index: 5;
+  background-color: #eee;
+  opacity: 0.7;
+  border-radius: 10rpx;
+}
+.confirm-bar2{
+  position:absolute;
+  top:100rpx;
+  right:40rpx;
+  width:60rpx;
+  height:60rpx;
+  z-index: 5;
+  background-color: #eee;
+  opacity: 0.7;
+  border-radius: 10rpx;
+}
+.confirm-bar1 .icon-cross{
+  background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Ctitle%3Ex%3C/title%3E %3Cpath d='M13.4 12l5.3-5.3c0.4-0.4 0.4-1 0-1.4s-1-0.4-1.4 0l-5.3 5.3-5.3-5.3c-0.4-0.4-1-0.4-1.4 0s-0.4 1 0 1.4l5.3 5.3-5.3 5.3c-0.4 0.4-0.4 1 0 1.4 0.2 0.2 0.4 0.3 0.7 0.3s0.5-0.1 0.7-0.3l5.3-5.3 5.3 5.3c0.2 0.2 0.5 0.3 0.7 0.3s0.5-0.1 0.7-0.3c0.4-0.4 0.4-1 0-1.4l-5.3-5.3z'%3E%3C/path%3E %3C/svg%3E");
+  background-size: cover;
+  display: block;
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+.confirm-bar2 .icon-checkmark{
+  background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Ctitle%3Echeck%3C/title%3E %3Cpath d='M20.7 5.3c-0.4-0.4-1-0.4-1.4 0l-10.3 10.3-4.3-4.3c-0.4-0.4-1-0.4-1.4 0s-0.4 1 0 1.4l5 5c0.2 0.2 0.4 0.3 0.7 0.3s0.5-0.1 0.7-0.3l11-11c0.4-0.4 0.4-1 0-1.4z'%3E%3C/path%3E %3C/svg%3E");
+  background-size: cover;
+  display: block;
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+.confirm-bar1:active .icon-cross{
+  background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Ctitle%3Ex%3C/title%3E %3Cpath d='M13.4 12l5.3-5.3c0.4-0.4 0.4-1 0-1.4s-1-0.4-1.4 0l-5.3 5.3-5.3-5.3c-0.4-0.4-1-0.4-1.4 0s-0.4 1 0 1.4l5.3 5.3-5.3 5.3c-0.4 0.4-0.4 1 0 1.4 0.2 0.2 0.4 0.3 0.7 0.3s0.5-0.1 0.7-0.3l5.3-5.3 5.3 5.3c0.2 0.2 0.5 0.3 0.7 0.3s0.5-0.1 0.7-0.3c0.4-0.4 0.4-1 0-1.4l-5.3-5.3z' fill='%23d6204b'%3E%3C/path%3E %3C/svg%3E");
+}
+.confirm-bar2:active .icon-checkmark{
+  background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Ctitle%3Echeck%3C/title%3E %3Cpath d='M20.7 5.3c-0.4-0.4-1-0.4-1.4 0l-10.3 10.3-4.3-4.3c-0.4-0.4-1-0.4-1.4 0s-0.4 1 0 1.4l5 5c0.2 0.2 0.4 0.3 0.7 0.3s0.5-0.1 0.7-0.3l11-11c0.4-0.4 0.4-1 0-1.4z' fill='%23d6204b'%3E%3C/path%3E %3C/svg%3E");
 }

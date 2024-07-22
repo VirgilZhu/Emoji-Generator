@@ -3,6 +3,7 @@ Page({
     imageSrc: '',
     originSrc: '',
     inputText: '',
+    page:'mainPage',
     styles: ['Original', 'Grayscale', '生命历程', '黑白', '人物抠图', '漫画'],
     selectedStyle: 'Original',
     canvasWidth: 0,
@@ -11,7 +12,17 @@ Page({
     test1: '1',
     display_scroll: false,
     isHidden: true,
-    count: '0'
+    count: '0',
+    imgWidth:0,
+    imgHeight:0,
+    imgTop:0,
+    imgLeft:0,
+    isCroper:true,
+    // 裁剪框 宽高
+    cutW: 50,
+    cutH: 50,
+    cutL: 50,
+    cutT: 0
   },
   onShow(){
     if (typeof this.getTabBar === 'function' && this.getTabBar()){
@@ -20,6 +31,36 @@ Page({
       });
     }
   },
+  loadImgOnImage: function () {
+    wx.getImageInfo({
+      src: this.data.imageSrc,
+      success: function (res) {
+        this.oldScale = 1
+        this.initRatio = res.height / this.data.imgViewHeight
+        if (this.initRatio < res.width / (750 * this.data.deviceRatio)) {
+          this.initRatio = res.width / (750 * this.data.deviceRatio)
+        }
+
+        // 图片显示大小
+        this.scaleWidth = (res.width / this.initRatio)
+        this.scaleHeight = (res.height / this.initRatio)
+
+        this.initScaleWidth = this.scaleWidth
+        this.initScaleHeight = this.scaleHeight
+        this.startX = 750 * this.data.deviceRatio / 2 - this.scaleWidth / 2;
+        this.startY = this.data.imgViewHeight / 2 - this.scaleHeight / 2;
+
+        this.setData({
+          imgWidth: this.scaleWidth,
+          imgHeight: this.scaleHeight,
+          imgTop: this.startY,
+          imgLeft: this.startX
+        })
+        wx.hideLoading();
+      }.bind(this)
+    })
+  },
+
   chooseImage() {
     const that = this;
     wx.chooseImage({
@@ -38,21 +79,195 @@ Page({
               canvasHeight: imageInfo.height,
               isHidden: false
             });
+            that.getImagePosition();
           }
         });
       }
     });
   },
+  getImagePosition() {
+    return new Promise((resolve, reject) => {
+      wx.createSelectorQuery()
+        .select('#myImage')
+        .boundingClientRect()
+        .exec((res) => {
+          const rect = res[0];
+          if (rect) {
+            // const height = (rect.width * this.data.canvasHeight)/this.data.canvasWidth
+            // height = Math.min(500, height)
+            this.setData({
+              imgWidth: rect.width,
+              imgHeight: Math.min(500, (rect.width * this.data.canvasHeight)/this.data.canvasWidth),
+              imgTop: rect.top,
+              imgLeft: rect.left
+            });
+            resolve(rect); // 操作成功，调用 resolve
+            //  debugger
+            console.log(this.data.imgHeight)
+          } else {
+            reject(new Error('Failed to get image position')); // 失败，调用 reject
+          }
+        });
+    });
+  },
 
-  conversionAddress() {
-    const that = this;
-    wx.getFileSystemManager().readFile({
-      filePath: that.data.imageSrc,
-      encoding: "base64",
+  croperStart(e){
+    this.croperX = e.touches[0].clientX
+    this.croperY = e.touches[0].clientY
+  },
+  croperMove(e){
+    var self = this
+    var dragLengthX = (e.touches[0].clientX-self.croperX)
+    var dragLengthY = (e.touches[0].clientY-self.croperY)
+    var minCutL = Math.max(0, self.data.imgLeft)
+    // var minCutT = Math.max(0, self.data.imgTop)
+    var minCutT = 0
+    // var maxCutL = Math.min(750 * self.deviceRatio - self.data.cutW, self.data.imgLeft + self.data.imgWidth - self.data.cutW)
+    var maxCutL =  self.data.imgLeft + self.data.imgWidth - self.data.cutW
+    // var maxCutT = Math.min(self.imgViewHeight - self.data.cutH, self.data.imgTop + self.data.imgHeight - self.data.cutH)
+    // var maxCutT = self.data.imgTop + self.data.imgHeight - self.data.cutH
+    var maxCutT = self.data.imgHeight - self.data.cutH
+    var newCutL = self.data.cutL + dragLengthX
+    var newCutT = self.data.cutT + dragLengthY
+    // debugger
+    if (newCutL < minCutL) newCutL = minCutL
+    if (newCutL > maxCutL) newCutL = maxCutL
+    if (newCutT < minCutT) newCutT = minCutT
+    if (newCutT > maxCutT) newCutT = maxCutT
+    this.setData({
+      cutL: newCutL,
+      cutT: newCutT,
+    })
+    // console.log(newCutL)
+    // console.log(newCutT)
+    // console.log(maxCutT)
+
+    self.croperX = e.touches[0].clientX
+    self.croperY = e.touches[0].clientY
+  },
+  dragPointStart(e) {
+    this.dragStartX = e.touches[0].clientX;
+    this.dragStartY = e.touches[0].clientY;
+    this.initDragCutW = this.data.cutW;
+    this.initDragCutH = this.data.cutH;
+  },
+  dragPointMove(e) {
+    const imgLeft = this.data.imgLeft;
+    const imgTop = this.data.imgTop;
+    const imgWidth = this.data.imgWidth;
+    const imgHeight = this.data.imgHeight;
+    // console.log(this.data.imgLeft)
+    // console.log(this.data.imgTop)
+    // console.log(this.data.imgWidth)
+    // console.log(this.data.imgHeight)
+    if (isNaN(imgLeft) || isNaN(imgTop) || isNaN(imgWidth) || isNaN(imgHeight)) {
+      console.error('Image properties are not valid:', {
+        imgLeft, imgTop, imgWidth, imgHeight
+      });
+      return;
+    }
+
+    const maxDragX = imgLeft + imgWidth;
+    const maxDragY = imgTop + imgHeight;
+    // const maxDragX = 10000000;
+    // const maxDragY = 10000000;
+    const dragMoveX = Math.min(e.touches[0].clientX, maxDragX);
+    const dragMoveY = Math.min(e.touches[0].clientY, maxDragY);
+    const dragLengthX = dragMoveX - this.dragStartX;
+    const dragLengthY = dragMoveY - this.dragStartY;
+    // console.log(dragMoveX)
+    // console.log(dragMoveY)
+    // console.log(maxDragX)
+    // console.log(maxDragY)
+    // debugger
+    if (dragLengthX + this.initDragCutW >= 0 && dragLengthY + this.initDragCutH >= 0) {
+      this.setData({
+        cutW: this.initDragCutW + dragLengthX,
+        cutH: this.initDragCutH + dragLengthY
+      });
+    }
+  },
+
+  competeCrop(){
+    var self=this
+    // wx.showLoading({
+    //   title: '截取中',
+    //   mask: true,
+    // })
+    // var initRatio =(this.data.canvasHeight * this.data.canvasWidth)/( this.data.imgHeight * this.data.imgWidth)
+    //图片截取大小
+    var sX = (self.data.cutL - self.data.imgLeft) * this.data.canvasWidth / this.data.imgWidth
+    var sY = (self.data.cutT - self.data.imgTop + 104 ) * this.data.canvasHeight / this.data.imgHeight
+    var sW = self.data.cutW * this.data.canvasWidth / this.data.imgWidth
+    var sH = self.data.cutH *  this.data.canvasHeight / this.data.imgHeight
+    console.log(this.data.imgTop)
+    console.log(this.data.cutH)
+    console.log(this.data.cutL)
+    console.log(this.data.cutT)
+    console.log(this.data.cutW)
+    console.log(this.data.canvasWidth)
+    console.log(this.data.canvasHeight)
+    console.log(this.data.imgWidth)
+    console.log(this.data.imgHeight)
+    self.setData({
+      // isCroper: false,
+      canvasWidth: sW,
+      canvasHeight: sH
+    })
+    console.log(sW)
+    console.log(sH)
+    var ctx = wx.createCanvasContext('tempCanvas')
+    ctx.drawImage(self.data.imageSrc, sX, sY, sW, sH, 0, 0, sW, sH)
+    ctx.draw()
+    //保存图片到临时路径
+    self.saveImgUseTempCanvas()
+    
+  },
+  saveImgUseTempCanvas: function() {
+    var that = this;
+    
+    // 获取 canvas 上下文
+    var ctx = wx.createCanvasContext('tempCanvas');
+    
+    // 假设你已经在 canvas 上绘制了需要的内容
+    // 这里不重复绘制过程，仅展示如何保存和更新 imageSrc
+    
+    // 调用 canvasToTempFilePath 将 canvas 内容保存为临时文件
+    wx.canvasToTempFilePath({
+      canvasId: 'tempCanvas',
+      x: 0,
+      y: 0,
+      width: this.data.canvasWidth,
+      height: this.data.canvasHeight,
+      destWidth: this.data.canvasWidth,
+      destHeight: this.data.canvasHeight,
       success: function(res) {
-        that.upCont(that.data.inputText, that.data.baseImg);
+        // res.tempFilePath 为保存后的图片的本地临时路径
+        that.setData({
+          imageSrc: res.tempFilePath,
+          originSrc: res.tempFilePath,
+          page: "mainPage"
+        });
+        
+        // 如果有需要，可以在这里做进一步处理，例如上传图片等
+      },
+      fail: function(err) {
+        console.log('canvasToTempFilePath error: ', err);
       }
     });
+  },
+
+  cancelCrop(){
+    const that = this
+    that.setData({
+      page: "mainPage"
+    })
+  },
+  startCrop(){
+    const that = this
+    that.setData({
+      page: "cropPage"
+    })
   },
 
   upCont: function () {

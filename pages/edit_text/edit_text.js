@@ -5,7 +5,13 @@ Page({
     textBoxes: [''],
     imageUrl: ''
   },
-  
+  onShow(){
+    if (typeof this.getTabBar === 'function' && this.getTabBar()){
+      this.getTabBar().setData({
+        currIndex: 0
+      });
+    }
+  },
   onStyleChange(e) {
     const selectedStyle = this.data.styleOptions[e.detail.value];
     let textBoxes = [];
