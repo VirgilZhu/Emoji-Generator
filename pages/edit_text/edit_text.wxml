@@ -3,22 +3,22 @@
   <!-- 样式选择横向滚动条 -->
   <scroll-view class="style-select" scroll-x>
     <view class="select-item">
-      <image data-type="igiari" data-typecn="我有异议" bind:tap="style_select" class="selectpng" src='./image/style1.png'></image>
+      <image data-type="igiari" data-typecn="我有异议" data-index="0" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 0 ? 'selected' : ''}}" src='./image/style1.png'></image>
     </view>
     <view class="select-item">
-      <image data-type="ba" data-typecn="碧蓝档案标题" bind:tap="style_select" class="selectpng" src='./image/bluearchive.jpg'></image>
+      <image data-type="ba" data-typecn="碧蓝档案标题" data-index="1" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 1 ? 'selected' : ''}}" src='./image/bluearchive.jpg'></image>
     </view>
     <view class="select-item">
-      <image data-type="5000choyen" data-typecn="看起来很酷的红银字体" bind:tap="style_select" class="selectpng" src='./image/style2.png'></image>
+      <image data-type="5000choyen" data-typecn="看起来很酷的红银字体" data-index="2" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 2 ? 'selected' : ''}}" src='./image/style2.png'></image>
     </view>
     <view class="select-item">
-      <image data-type="luxun" data-typecn="鲁迅说过" bind:tap="style_select" class="selectpng" src='./image/luxun.png'></image>
+      <image data-type="luxun" data-typecn="鲁迅说过" data-index="3" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 3 ? 'selected' : ''}}" src='./image/luxun.png'></image>
     </view>
     <view class="select-item">
-      <image data-type="ecnulion" data-typecn="花狮举牌子" bind:tap="style_select" class="selectpng" src='./image/ecnulion.png'></image>
+      <image data-type="ecnulion" data-typecn="花狮举牌子" data-index="4" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 4 ? 'selected' : ''}}" src='./image/ecnulion.png'></image>
     </view>
     <view class="select-item">
-      <image data-type="ecnublackboard" data-typecn="花狮敲黑板" bind:tap="style_select" class="selectpng" src='./image/blackboard.png'></image>
+      <image data-type="ecnublackboard" data-typecn="花狮敲黑板" data-index="5" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 5 ? 'selected' : ''}}" src='./image/blackboard.png'></image>
     </view>
     <!-- Add more styles as needed -->
   </scroll-view>

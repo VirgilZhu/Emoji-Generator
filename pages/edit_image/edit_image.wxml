@@ -12,32 +12,32 @@
 
   <scroll-view hidden="{{isHidden}}" class="style-select"  scroll-x >
   <view class="select-item">
-    <image data-type="graywordmeme" data-typecn="黑白加字" bind:tap="style_select" class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
+    <image data-type="graywordmeme" data-typecn="黑白加字" data-index="0" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 0 ? 'selected' : ''}}" src='./image/graywordmeme.png' alt="Upload Icon"></image>
     <text></text>
   </view>
   <view class="select-item">
-    <image data-type="always" data-typecn="要我一直这样吗" bind:tap="style_select" class="selectpng" src='./image/always.png' alt="Upload Icon"></image>
+    <image data-type="always" data-typecn="要我一直这样吗" data-index="1" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 1 ? 'selected' : ''}}" src='./image/always.png' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="fightsunuo" data-typecn="我打宿傩？" bind:tap="style_select" class="selectpng" src='./image/fightsunuo.jpg' alt="Upload Icon"></image>
+    <image data-type="fightsunuo" data-typecn="我打宿傩？" data-index="2" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 2 ? 'selected' : ''}}" src='./image/fightsunuo.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="cannot" data-typecn="加载不出来" bind:tap="style_select" class="selectpng" src='./image/cantload.png' alt="Upload Icon"></image> 
+    <image data-type="cannot" data-typecn="加载不出来" data-index="3" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 3 ? 'selected' : ''}}" src='./image/cantload.png' alt="Upload Icon"></image> 
   </view>
   <view class="select-item">
-    <image data-type="animegen_gqj" data-typecn="宫崎骏风格" bind:tap="style_select" class="selectpng" src='./image/animegen_gqj.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_gqj" data-typecn="宫崎骏风格" data-index="4" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 4 ? 'selected' : ''}}" src='./image/animegen_gqj.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_xhc" data-typecn="新海诚风格" bind:tap="style_select" class="selectpng" src='./image/animegen_xhc.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_xhc" data-typecn="新海诚风格" data-index="5" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 5 ? 'selected' : ''}}" src='./image/animegen_xhc.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_rbf" data-typecn="日本画风格" bind:tap="style_select" class="selectpng" src='./image/animegen_rbf.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_rbf" data-typecn="日本画风格" data-index="6" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 6 ? 'selected' : ''}}" src='./image/animegen_rbf.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_smf" data-typecn="素描风" bind:tap="style_select" class="selectpng" src='./image/animegen_smf.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_smf" data-typecn="素描风" data-index="7" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 7 ? 'selected' : ''}}" src='./image/animegen_smf.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="bodysegment" data-typecn="人体识别" bind:tap="style_select" class="selectpng" src='./image/bodysegment.jpg' alt="Upload Icon"></image>
+    <image data-type="bodysegment" data-typecn="人体识别" data-index="8" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 8 ? 'selected' : ''}}" src='./image/bodysegment.jpg' alt="Upload Icon"></image>
   </view>
   <!-- <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: red;'></view>
   <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: blue;'></view>

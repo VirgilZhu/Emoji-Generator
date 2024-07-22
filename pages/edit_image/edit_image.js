@@ -6,11 +6,11 @@ Page({
     styles: ['Original', 'Grayscale', '生命历程', '黑白', '人物抠图', '漫画'],
     selectedStyle: 'Original',
     selectedStyleCN: '无',
+    selectedStyleIndex: -1,
     canvasWidth: 0,
     canvasHeight: 0,
     baseImg: '',
     test1: '1',
-    display_scroll: false,
     isHidden: true,
     count: '0'
   },
@@ -208,11 +208,14 @@ Page({
   style_select(e) {
     const type = e.currentTarget.dataset.type; 
     const typeCN = e.currentTarget.dataset.typecn;
+    const index = parseInt(e.currentTarget.dataset.index);
     this.setData({
       selectedStyle: type,
-      selectedStyleCN: typeCN
+      selectedStyleCN: typeCN,
+      selectedStyleIndex: index
     });
     console.log(this.data.selectedStyle);
+    console.log(this.data.selectedStyleIndex);
   },
 
   inputTextChange(e) {
@@ -267,19 +270,4 @@ Page({
     });
   },
 
-  hide_scroll(e) {
-    setTimeout(function () {
-      this.setData({
-        display_scroll: false
-      });
-    }.bind(this), 0);
-  },
-
-  show_scroll(e) {
-    setTimeout(function () {
-      this.setData({
-        display_scroll: true
-      });
-    }.bind(this), 0);
-  }
 });

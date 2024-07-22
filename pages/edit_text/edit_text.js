@@ -3,6 +3,7 @@ Page({
     styleOptions: ['Style 1', 'Style 2', 'Style 3'],
     selectedStyle: 'Style 1',
     selectedStyleCN: '无',
+    selectedStyleIndex: -1,
     textBoxes: [''],
     imageUrl: 'image/style2.png',
     // num_textboxes: 0
@@ -73,16 +74,15 @@ Page({
   style_select(e) {
     const type = e.currentTarget.dataset.type;
     const typeCN = e.currentTarget.dataset.typecn;
-    const num_txtbox = e.currentTarget.dataset.txtbox;
+    const index = parseInt(e.currentTarget.dataset.index);
     this.setData({
       selectedStyle: type,
       selectedStyleCN: typeCN,
-      num_textboxes: num_txtbox
+      selectedStyleIndex: index
     }, () => {
       this.updateTextBoxes();
     });
     console.log(this.data.selectedStyle);
-    console.log(this.data.num_textboxes);
   },
   onTextInput(e) {
     const index = e.currentTarget.dataset.index;

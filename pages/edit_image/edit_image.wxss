@@ -133,16 +133,23 @@
 }
 
 .select-item{
-  width:160rpx;
+  width: 160rpx;
   height: 150rpx;
   display: inline-block;
   background-color: rgb(244, 245, 245);
+  border: 2px solid rgb(244, 245, 245);
+  margin: 5rpx;
+  box-sizing: border-box;
 }
 
 .selectpng{
   width: 150rpx;
   height: 150rpx;
   position: relative;
-  left: 5px; 
+  right: 5px; 
   top: 0px;
+}
+
+.selected {
+  border: 2px solid red;
 }
