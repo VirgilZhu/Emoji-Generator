@@ -11,13 +11,29 @@
   padding: 0;
 }
 
-.picker {
-  /* margin-top: 20px; */
+/* .picker {
+  margin-top: 20px; 
   padding: 10px;
   background-color: rgb(158, 204, 51);
   color: white;
   border-radius: 5px;
   text-align: center;
+} */
+
+.showtype {
+  padding: 10px 20px;
+  border: 1px solid rgb(0, 132, 255);
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 20px;
+  font-size: 16px;
+  color:white;
+  background-color: rgb(158, 204, 51);
+  margin: 10px;
 }
 
 .grayscale {

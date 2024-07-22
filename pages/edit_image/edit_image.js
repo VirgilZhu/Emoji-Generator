@@ -5,6 +5,7 @@ Page({
     inputText: '',
     styles: ['Original', 'Grayscale', '生命历程', '黑白', '人物抠图', '漫画'],
     selectedStyle: 'Original',
+    selectedStyleCN: '无',
     canvasWidth: 0,
     canvasHeight: 0,
     baseImg: '',
@@ -36,8 +37,11 @@ Page({
               originSrc: tempFilePaths[0],
               canvasWidth: imageInfo.width,
               canvasHeight: imageInfo.height,
-              isHidden: false
+              isHidden: false,
+              selectedStyle: 'Original',
+              selectedStyleCN: '无'
             });
+            console.log(that.data.imageSrc)
           }
         });
       }
@@ -51,71 +55,6 @@ Page({
       encoding: "base64",
       success: function(res) {
         that.upCont(that.data.inputText, that.data.baseImg);
-      }
-    });
-  },
-
-  upCont: function () {
-    const that = this;
-    const fs = wx.getFileSystemManager();
-    let base64 = fs.readFileSync(this.data.originSrc, 'base64');
-    
-    wx.request({
-      url: "https://39.105.8.203/graywordmeme", // 使用 HTTPS
-      method: "POST",
-      data: {
-        img: base64,
-        text: this.data.inputText
-      },
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: (res) => {
-        console.log('Request succeeded:', res);
-        let base64Data = res.data.result;
-
-        // 检查 base64Data 是否为有效的 Base64 字符串
-        if (!base64Data || !/^[A-Za-z0-9+/=]+$/.test(base64Data)) {
-          console.error('Invalid Base64 string:', base64Data);
-          wx.showToast({
-            title: 'Invalid Base64 data',
-            icon: 'error',
-            duration: 2000
-          });
-          return;
-        }
-
-        let filePath = `${wx.env.USER_DATA_PATH}/modified_image.png`;
-
-        // 使用 wx.base64ToArrayBuffer 将 base64 编码的数据转换为 ArrayBuffer
-        let buffer = wx.base64ToArrayBuffer(base64Data);
-
-        fs.writeFile({
-          filePath: filePath,
-          data: buffer,
-          encoding: 'binary',
-          success: () => {
-            that.setData({
-              imageSrc: filePath,
-            });
-            wx.showToast({
-              title: 'Image modified successfully!',
-              icon: 'success',
-              duration: 2000
-            });
-          },
-          fail: (err) => {
-            console.error('Failed to save modified image:', err);
-          }
-        });
-      },
-      fail: (err) => {
-        console.error('Request failed:', err);
-        wx.showToast({
-          title: 'Request failed',
-          icon: 'error',
-          duration: 2000
-        });
       }
     });
   },
@@ -140,6 +79,11 @@ Page({
             };
             break;
         case 'fightsunuo':
+            requestPayload = {
+                img: base64
+            };
+            break;
+        case 'cannot':
             requestPayload = {
                 img: base64
             };
@@ -263,8 +207,10 @@ Page({
 
   style_select(e) {
     const type = e.currentTarget.dataset.type; 
+    const typeCN = e.currentTarget.dataset.typecn;
     this.setData({
-      selectedStyle: type
+      selectedStyle: type,
+      selectedStyleCN: typeCN
     });
     console.log(this.data.selectedStyle);
   },

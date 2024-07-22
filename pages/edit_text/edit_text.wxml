@@ -3,30 +3,47 @@
   <!-- 样式选择横向滚动条 -->
   <scroll-view class="style-select" scroll-x>
     <view class="select-item">
-      <image data-type="style1" bindtap="style_select" class="selectpng" src='./image/style1.png' alt="Style 1"></image>
+      <image data-type="igiari" data-typecn="我有异议" bind:tap="style_select" class="selectpng" src='./image/style1.png'></image>
     </view>
     <view class="select-item">
-      <image data-type="style2" bindtap="style_select" class="selectpng" src='./image/style2.png' alt="Style 2"></image>
+      <image data-type="ba" data-typecn="碧蓝档案标题" bind:tap="style_select" class="selectpng" src='./image/bluearchive.jpg'></image>
+    </view>
+    <view class="select-item">
+      <image data-type="5000choyen" data-typecn="看起来很酷的红银字体" bind:tap="style_select" class="selectpng" src='./image/style2.png'></image>
+    </view>
+    <view class="select-item">
+      <image data-type="luxun" data-typecn="鲁迅说过" bind:tap="style_select" class="selectpng" src='./image/luxun.png'></image>
+    </view>
+    <view class="select-item">
+      <image data-type="ecnulion" data-typecn="花狮举牌子" bind:tap="style_select" class="selectpng" src='./image/ecnulion.png'></image>
+    </view>
+    <view class="select-item">
+      <image data-type="ecnublackboard" data-typecn="花狮敲黑板" bind:tap="style_select" class="selectpng" src='./image/blackboard.png'></image>
     </view>
     <!-- Add more styles as needed -->
   </scroll-view>
 
 
-  <picker mode="selector" range="{{styleOptions}}" bindchange="onStyleChange">
+  <!-- <picker mode="selector" range="{{styleOptions}}" bindchange="onStyleChange">
     <view class="picker">
       <text>选择样式: {{selectedStyle}}</text>
     </view>
-  </picker>
+  </picker> -->
+
+  <text class="showtype">选择样式：{{selectedStyleCN}}</text>
 
   <view class="input-container">
     <block wx:for="{{textBoxes}}" wx:key="index">
       <view class="input-box">
-        <textarea placeholder="输入文字" bindinput="onTextInput" data-index="{{index}}" value="{{item}}"></textarea>
+        <textarea placeholder="{{item.placeholder}}" bindinput="onTextInput" data-index="{{index}}" value="{{item.value}}"></textarea>
       </view>
     </block>
   </view>
 
   <button class="submit-button" bindtap="submitText">提交</button>
+  <block wx:if="{{imageUrl}}">
+    <image src="{{imageUrl}}" mode="aspectFit"></image>  
+  </block>
 
   <view wx:if="{{imageUrl}}">
     <image class="preview-image" src="{{imageUrl}}" mode="aspectFit"></image>

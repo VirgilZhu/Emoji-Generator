@@ -2,12 +2,12 @@ Component({
   data: {
     currIndex: 0,
     menu: [{
-        name: "edit_text",
+        name: "文字meme",
         icon: "icon-manage",
         pagePath: "/pages/edit_text/edit_text"
       },
       {
-        name: "edit_image",
+        name: "表情包",
         icon: "icon-manage",
         pagePath: "/pages/edit_image/edit_image"
       }
