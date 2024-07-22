@@ -1,0 +1,35 @@
+<view class="container">
+
+  <!-- 样式选择横向滚动条 -->
+  <scroll-view class="style-select" scroll-x>
+    <view class="select-item">
+      <image data-type="style1" bindtap="style_select" class="selectpng" src='./image/style1.png' alt="Style 1"></image>
+    </view>
+    <view class="select-item">
+      <image data-type="style2" bindtap="style_select" class="selectpng" src='./image/style2.png' alt="Style 2"></image>
+    </view>
+    <!-- Add more styles as needed -->
+  </scroll-view>
+
+
+  <picker mode="selector" range="{{styleOptions}}" bindchange="onStyleChange">
+    <view class="picker">
+      <text>选择样式: {{selectedStyle}}</text>
+    </view>
+  </picker>
+
+  <view class="input-container">
+    <block wx:for="{{textBoxes}}" wx:key="index">
+      <view class="input-box">
+        <textarea placeholder="输入文字" bindinput="onTextInput" data-index="{{index}}" value="{{item}}"></textarea>
+      </view>
+    </block>
+  </view>
+
+  <button class="submit-button" bindtap="submitText">提交</button>
+
+  <view wx:if="{{imageUrl}}">
+    <image class="preview-image" src="{{imageUrl}}" mode="aspectFit"></image>
+    <button class="save-button" bindtap="saveImage">保存图片</button>
+  </view>
+</view>

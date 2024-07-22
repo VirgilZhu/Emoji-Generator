@@ -2,12 +2,12 @@ Component({
   data: {
     currIndex: 0,
     menu: [{
-        name: "home",
-        icon: "icon-home",
-        pagePath: "/pages/index/index"
+        name: "edit_text",
+        icon: "icon-manage",
+        pagePath: "/pages/edit_text/edit_text"
       },
       {
-        name: "edit",
+        name: "edit_image",
         icon: "icon-manage",
         pagePath: "/pages/edit_image/edit_image"
       }

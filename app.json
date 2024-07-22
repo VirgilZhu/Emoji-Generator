@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/edit_image/edit_image",
+    "pages/edit_text/edit_text",
     "pages/index/index",
     "pages/logs/logs"
   ],
@@ -11,13 +12,14 @@
     "backgroundColor": "#654321",
     "list": [
       {
-        "pagePath": "pages/index/index", 
-        "text": "Home"
+        "pagePath": "pages/edit_text/edit_text",
+        "text": "edit_text"
       },
       {
         "pagePath": "pages/edit_image/edit_image",
         "text": "edit_image"
       }
+
     ]
   },
   "usingComponents": {},
