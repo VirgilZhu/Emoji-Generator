@@ -8,7 +8,7 @@ Page({
     page:'mainPage',
     styles: ['Original', 'Grayscale', '生命历程', '黑白', '人物抠图', '漫画'],
     selectedStyle: 'Original',
-    selectedStyleCN: '无',
+    selectedStyleCN: '原图',
     selectedStyleIndex: -1,
     textEnable:'false',
     canvasWidth: 0,
@@ -416,14 +416,19 @@ Page({
                 img: base64
             };
             break;
+        case 'trance':
+            requestPayload = {
+                img: base64
+            };
+            break;
         default:
             requestPayload = { img: base64 }; // 默认情况下只发送图片
             break;
     }
     
     wx.request({
-      url: "http://39.105.8.203/" + requestType,
-      // url: "http://127.0.0.1:5000/" + requestType,
+      // url: "http://39.105.8.203/" + requestType,
+      url: "http://127.0.0.1:5000/" + requestType,
       method: "POST",
       data: requestPayload,
       header: {

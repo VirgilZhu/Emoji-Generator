@@ -43,6 +43,9 @@
   <view class="select-item">
     <image data-type="bodysegment" data-typecn="人体识别" data-index="8" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 8 ? 'selected' : ''}}" src='./image/bodysegment.jpg' alt="Upload Icon"></image>
   </view>
+  <view class="select-item">
+    <image data-type="trance" data-typecn="模糊" data-index="9" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 8 ? 'selected' : ''}}" src='./image/trance.jpg' alt="Upload Icon"></image>
+  </view>
   <!-- <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: red;'></view>
   <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: blue;'></view>
   <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: green;'></view>
