@@ -1,44 +1,44 @@
 <view class="container" wx:if="{{page==='mainPage'}}">
-  <button style="width:25vw" class="btnUpload" bindtap="chooseImage">
+  <button style="width:28vw" class="btnUpload" bindtap="chooseImage">
     <image class="btnUploadImg" src='./image/upload.png' alt="Upload Icon"></image>
     <view>上传</view>
   </button>
-  <button style="width:25vw" class="btnCut" bindtap="startCrop">
-    <image class="btnUploadImg" src='./image/upload.png' alt="Upload Icon"></image>
+  <button wx:if="{{imageSrc}}" style="width:28vw" class="btnCut" bindtap="startCrop">
+    <image class="btnUploadImg" src='./image/cut.png' alt="Upload Icon"></image>
     <view>裁剪</view>
   </button>
-  <button style="width:25vw" class="btnSaved" bindtap="saveImage" disabled="{{!imageSrc}}">
+  <button style="width:28vw" class="btnSaved" bindtap="saveImage" disabled="{{!imageSrc}}">
     <image class="btnSaveImg" src='./image/save.png' alt="Upload Icon"></image>
     <view>保存</view>
   </button>
 
-  <image id="myImage" src="{{imageSrc || './image/cam.webp'}}" mode="aspectFit" class="preview-image {{selectedStyle}}"></image>
+  <image src="{{imageSrc || './image/cam.webp'}}" mode="aspectFit" class="preview-image {{selectedStyle}}"></image>
 
   <scroll-view hidden="{{isHidden}}" class="style-select"  scroll-x >
   <view class="select-item">
-    <image data-type="graywordmeme"  bind:tap="style_select" class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
+    <image data-type="graywordmeme" data-text="true" bind:tap="style_select" class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
     <text></text>
   </view>
   <view class="select-item">
-    <image data-type="always"  bind:tap="style_select" class="selectpng" src='./image/always.png' alt="Upload Icon"></image>
+    <image data-type="always" data-text="false" bind:tap="style_select" class="selectpng" src='./image/always.png' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="fightsunuo"  bind:tap="style_select" class="selectpng" src='./image/fightsunuo.jpg' alt="Upload Icon"></image>
+    <image data-type="fightsunuo" data-text="false" bind:tap="style_select" class="selectpng" src='./image/fightsunuo.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_gqj"  bind:tap="style_select" class="selectpng" src='./image/animegen_gqj.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_gqj" data-text="false" bind:tap="style_select" class="selectpng" src='./image/animegen_gqj.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_xhc"  bind:tap="style_select" class="selectpng" src='./image/animegen_xhc.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_xhc" data-text="false" bind:tap="style_select" class="selectpng" src='./image/animegen_xhc.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_rbf"  bind:tap="style_select" class="selectpng" src='./image/animegen_rbf.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_rbf" data-text="false" bind:tap="style_select" class="selectpng" src='./image/animegen_rbf.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_smf"  bind:tap="style_select" class="selectpng" src='./image/animegen_smf.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_smf" data-text="false" bind:tap="style_select" class="selectpng" src='./image/animegen_smf.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="bodysegment"  bind:tap="style_select" class="selectpng" src='./image/bodysegment.jpg' alt="Upload Icon"></image>
+    <image data-type="bodysegment" data-text="false" bind:tap="style_select" class="selectpng" src='./image/bodysegment.jpg' alt="Upload Icon"></image>
   </view>
   <!-- <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: red;'></view>
   <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: blue;'></view>
@@ -61,9 +61,9 @@
       样式: {{selectedStyle}}
       </view>
     </picker>
-    <textarea placeholder="Enter text" bindinput="inputTextChange" class="input-text"></textarea>
-    <button class="green-button" bindtap="applyText">Add Text</button>
-    <button class="green-button" bindtap="always_test">测试</button>
+    <textarea wx:if="{{textEnable==='true'}}" placeholder="请输入文字" bindinput="inputTextChange" class="input-text"></textarea>
+    <!-- <button class="green-button" bindtap="applyText">请输入文字</button> -->
+    <button class="green-button" bindtap="always_test">生成</button>
     <canvas canvas-id="myCanvas" style="display:none;" width="{{canvasWidth}}" height="{{canvasHeight}}"></canvas>
 
   </view>

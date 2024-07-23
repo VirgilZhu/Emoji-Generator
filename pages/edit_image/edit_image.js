@@ -6,6 +6,7 @@ Page({
     page:'mainPage',
     styles: ['Original', 'Grayscale', '生命历程', '黑白', '人物抠图', '漫画'],
     selectedStyle: 'Original',
+    textEnable:'false',
     canvasWidth: 0,
     canvasHeight: 0,
     baseImg: '',
@@ -79,7 +80,7 @@ Page({
               canvasHeight: imageInfo.height,
               isHidden: false
             });
-            that.getImagePosition();
+            //that.getImagePosition();
           }
         });
       }
@@ -102,7 +103,7 @@ Page({
               imgLeft: rect.left
             });
             resolve(rect); // 操作成功，调用 resolve
-            //  debugger
+            //debugger
             console.log(this.data.imgHeight)
           } else {
             reject(new Error('Failed to get image position')); // 失败，调用 reject
@@ -267,7 +268,8 @@ Page({
     const that = this
     that.setData({
       page: "cropPage"
-    })
+    });
+    that.getImagePosition()
   },
 
   upCont: function () {
@@ -478,8 +480,10 @@ Page({
 
   style_select(e) {
     const type = e.currentTarget.dataset.type; 
+    const text = e.currentTarget.dataset.text;
     this.setData({
-      selectedStyle: type
+      selectedStyle: type,
+      textEnable: text
     });
     console.log(this.data.selectedStyle);
   },
