@@ -47,7 +47,7 @@
   height: 20px;
   font-size: 16px;
   color:white;
-  background-color: rgb(158, 204, 51);
+  background-color: rgb(166, 223, 33);
   margin: 10px;
 }
 
@@ -181,11 +181,7 @@
 }
 
 .selected {
-  border: 2px solid red;
-}
-
-.selected {
-  border: 2px solid red;
+  border: 2px solid rgb(29, 151, 207);
 }
 
 .corpper-view-box{
