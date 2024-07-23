@@ -8,8 +8,11 @@ Page({
     page:'mainPage',
     styles: ['Original', 'Grayscale', '生命历程', '黑白', '人物抠图', '漫画'],
     selectedStyle: 'Original',
+    textorigin:'请输入文字',
     selectedStyleCN: '原图',
     selectedStyleIndex: -1,
+    secondimageEnable: 'false',
+    fixEnable:'false',
     textEnable:'false',
     canvasWidth: 0,
     canvasHeight: 0,
@@ -95,6 +98,27 @@ Page({
               isHidden: false,
               selectedStyle: 'Original',
               selectedStyleCN: '无'
+            });
+            console.log(that.data.imageSrc)
+            //that.getImagePosition();
+          }
+        });
+      }
+    });
+  },
+  choosesecondImage() {
+    const that = this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success(res) {
+        const tempFilePaths = res.tempFilePaths;
+        wx.getImageInfo({
+          src: tempFilePaths[0],
+          success(imageInfo) {
+            that.setData({
+              secondoriginSrc: tempFilePaths[0],
             });
             console.log(that.data.imageSrc)
             //that.getImagePosition();
@@ -358,6 +382,7 @@ Page({
     const that = this;
     const fs = wx.getFileSystemManager();
     let base64 = fs.readFileSync(this.data.originSrc, 'base64');
+    let secondbase64 = fs.readFileSync(this.data.secondoriginSrc, 'base64');
     const type = this.data.selectedStyle;
     let requestPayload = {};
     let requestType = type;
@@ -419,6 +444,56 @@ Page({
         case 'trance':
             requestPayload = {
                 img: base64
+            };
+            break;
+        case 'confuse':
+            requestPayload = {
+                img: base64
+            };
+            break;
+        case 'kiss':
+            requestPayload = {
+                img1: base64,
+                img2: secondbase64
+            };
+            break;
+        case 'rub':
+          // secondbase64 = fs.readFileSync(this.data.secondoriginSrc, 'base64');
+          requestPayload = {
+              img1: base64,
+              img2: secondbase64
+            };
+          break;
+        case 'punch':
+            requestPayload = {
+                img: base64
+            };
+            break;
+        case 'play':
+            requestPayload = {
+                img: base64,
+            };
+            break;
+        case 'guichu':
+            requestPayload = {
+                img: base64,
+                text: this.data.inputText
+            };
+            break;
+        case 'funnymirror':
+            requestPayload = {
+                img: base64,
+              };
+              break;
+        case 'chasetrain':
+            requestPayload = {
+                img: base64,
+            };
+            break;
+        case 'flashblind':
+            requestPayload = {
+                img: base64,
+                text: this.data.inputText
             };
             break;
         default:
