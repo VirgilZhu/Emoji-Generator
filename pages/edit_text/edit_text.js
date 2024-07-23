@@ -9,7 +9,8 @@ Page({
     textBoxes: [''],
     imageUrl: '',
     count: '0',
-    currIndex: app.globalData.currIndex
+    currIndex: app.globalData.currIndex,
+    changeStyle: true
   },
   onLoad(options) {
     const that = this;
@@ -37,7 +38,7 @@ Page({
     const type = this.data.selectedStyle;
     switch (type) {
       case 'igiari':
-        textBoxes = [{value: "", placeholder: "输入不超过6个字"}];
+        textBoxes = [{value: "" ,placeholder: "输入不超过6个字"}];
         break;
       case 'ba':
         textBoxes = [{value: "", placeholder: '蓝色文字'},{value: "", placeholder: '黑色文字'}];
@@ -57,12 +58,10 @@ Page({
       default:
         break;
     }
-    // for (let i = 0; i < this.data.num_textboxes; i++) {
-    //   textBoxes.push("");
-    // }
     this.setData({
       textBoxes: textBoxes
     });
+    console.log(this.data.textBoxes);
   },
   style_select(e) {
     const type = e.currentTarget.dataset.type;
@@ -80,14 +79,20 @@ Page({
   onTextInput(e) {
     const index = e.currentTarget.dataset.index;
     const value = e.detail.value;
-    const textBoxes = this.data.textBoxes;
-    textBoxes[index] = value;
-
+    const textBoxes = this.data.textBoxes.map((item, idx) => {
+      if (idx === index) {
+        return { ...item, value: value };
+      }
+      return item;
+    });
+    // textBoxes[index] = value;
     this.setData({
       textBoxes: textBoxes
     });
   },
-
+  emptyInput(obj) {
+    return Object.values(obj).some(value => value === "" || value === null || value === undefined)
+  },
   submitText() {
     let requestData = {};
     let requestType = '';
@@ -99,53 +104,65 @@ Page({
       case 'igiari':
         requestType = '/aceattorney';
         requestData = {
-          text: this.data.textBoxes[0]
+          text: this.data.textBoxes[0].value
         };
         break;
       case 'ba':
         requestType = '/bluearchive';
         requestData = {
-          text1: this.data.textBoxes[0],
-          text2: this.data.textBoxes[1]
+          text1: this.data.textBoxes[0].value,
+          text2: this.data.textBoxes[1].value
         };
         break;
       case '5000choyen':
         requestType = '/colorful';
         requestData = {
-          text1: this.data.textBoxes[0],
-          text2: this.data.textBoxes[1]
+          text1: this.data.textBoxes[0].value,
+          text2: this.data.textBoxes[1].value
         };
         break;
       case 'luxun':
         requestType = '/luxun';
         requestData = {
-          text: this.data.textBoxes[0]
+          text: this.data.textBoxes[0].value
         };
         break;
       case 'ecnulion':
         requestType = '/ecnulion';
         requestData = {
-          text: this.data.textBoxes[0]
+          text: this.data.textBoxes[0].value
         };
         break;
       case 'ecnublackboard':
         requestType = '/ecnublackboard';
         requestData = {
-          text: this.data.textBoxes[0]
+          text: this.data.textBoxes[0].value
         };
         break;
       default:
         break;
     }
-    console.log(requestData)
+    console.log(requestData);
+    console.log(this.emptyInput(requestData));
+    if (this.emptyInput(requestData)) {
+      wx.showToast({
+        title: '请输入文字！',
+        icon: 'error',
+        duration: 2000
+      });
+      return;
+    }
+
     wx.request({
-      url: `http://39.105.8.203${requestType}`, 
-      // url: `http://127.0.0.1:5000${requestType}`,// 替换为你的后端接口
-      method: 'POST',
+      url: "http://39.105.8.203/" + requestType,
+      // url: "http://127.0.0.1:5000/" + requestType,
+      method: "POST",
       data: requestData,
+      header: {
+        'Content-Type': 'application/json'
+      },
       success: (res) => {
         let base64Data = res.data.result;
-        console.log(res)
         console.log(res.data.msg)
 
         // 检查 base64Data 是否为有效的 Base64 字符串
@@ -199,7 +216,7 @@ Page({
               imageUrl: filePath, // 更新 imageSrc 为本地文件路径
             });
             wx.showToast({
-              title: 'Image modified successfully!',
+              title: '生成成功!',
               icon: 'success',
               duration: 2000
             });

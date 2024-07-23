@@ -34,7 +34,7 @@
   <view class="input-container">
     <block wx:for="{{textBoxes}}" wx:key="index">
       <view class="input-box">
-        <textarea class="input-text" placeholder="{{item.placeholder}}" bindinput="onTextInput" data-index="{{index}}"></textarea>
+        <textarea class="input-text" placeholder="{{item.placeholder}}" bindinput="onTextInput" data-index="{{index}}" value="{{item.value}}"></textarea>
       </view>
     </block>
   </view>

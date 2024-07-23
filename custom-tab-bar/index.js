@@ -5,12 +5,12 @@ Component({
     currIndex: app.globalData.currIndex,
     menu: [{
         name: "文字meme",
-        icon: "icon-manage",
+        icon: "icon-yishuzi",
         pagePath: "/pages/edit_text/edit_text"
       },
       {
         name: "表情包",
-        icon: "icon-manage",
+        icon: "icon-emoji",
         pagePath: "/pages/edit_image/edit_image"
       },
       // {

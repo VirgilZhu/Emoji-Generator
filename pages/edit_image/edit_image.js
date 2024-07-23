@@ -5,6 +5,7 @@ Page({
     imageSrc: '',
     originSrc: '',
     inputText: '',
+    secondoriginSrc:'',
     page:'mainPage',
     styles: ['Original', 'Grayscale', '生命历程', '黑白', '人物抠图', '漫画'],
     selectedStyle: 'Original',
@@ -20,7 +21,8 @@ Page({
     test1: '1',
     isHidden: true,
     cropEnable: false,
-    count: '0',
+    jpgcount: '0',
+    gifcount: '0',
     imgWidth:0,
     imgHeight:0,
     imgTop:0,
@@ -97,14 +99,22 @@ Page({
               canvasWidth: imageInfo.width,
               canvasHeight: imageInfo.height,
               // isHidden: false,
-              cropEnable: true,
-              selectedStyle: 'Original',
-              selectedStyleCN: '无'
+              // cropEnable: true,
+              // selectedStyle: 'Original',
+              // selectedStyleCN: '无'
             });
             that.setData({
               isHidden: false,
             });
-            console.log(that.data.imageSrc)
+            that.setData({
+              cropEnable: true,
+            });
+            that.setData({
+              secondoriginSrc: ""
+            })
+            console.log(0)
+            console.log(that.data.secondoriginSrc)
+            console.log(0)
             //that.getImagePosition();
           }
         });
@@ -391,10 +401,19 @@ Page({
     if(this.data.secondoriginSrc){
       secondbase64 = fs.readFileSync(this.data.secondoriginSrc, 'base64');
     }
+    console.log(this.data.secondoriginSrc)
+    console.log(secondbase64)
     const type = this.data.selectedStyle;
     let requestPayload = {};
     let requestType = type;
     switch (type) {
+        case 'Original':
+          wx.showToast({
+            title: '请选择样式',
+            icon: 'fail',
+            duration: 2000
+          });
+          return
         case 'graywordmeme':
             requestPayload = {
                 img: base64,
@@ -460,6 +479,14 @@ Page({
             };
             break;
         case 'kiss':
+            if(secondbase64 == ""){
+              wx.showToast({
+                title: '请上传第二张图片',
+                icon: 'fail',
+                duration: 2000
+              });
+              return
+            }
             requestPayload = {
                 img1: base64,
                 img2: secondbase64
@@ -467,6 +494,14 @@ Page({
             break;
         case 'rub':
           // secondbase64 = fs.readFileSync(this.data.secondoriginSrc, 'base64');
+          if(secondbase64 == ""){
+            wx.showToast({
+              title: '请上传第二张图片',
+              icon: 'fail',
+              duration: 2000
+            });
+            return
+          }
           requestPayload = {
               img1: base64,
               img2: secondbase64
@@ -510,14 +545,24 @@ Page({
     }
     
     wx.request({
-      // url: "http://39.105.8.203/" + requestType,
-      url: "http://127.0.0.1:5000/" + requestType,
+      url: "http://39.105.8.203/" + requestType,
+      // url: "http://127.0.0.1:5000/" + requestType,
       method: "POST",
       data: requestPayload,
       header: {
         'Content-Type': 'application/json'
       },
       success: (res) => {
+        if(this.data.fixEnable == 'false'){
+          this.setData({
+            cropEnable: false
+          })
+        }
+        else{
+          this.setData({
+            cropEnable: false
+          })
+        }
         let base64Data = res.data.result;
         console.log(res.data.msg)
 
@@ -532,33 +577,50 @@ Page({
         //   return;
         // }
 
-        let count = this.data.count;
-        let filePath = `${wx.env.USER_DATA_PATH}/modified_image${count}.png`; // 保存图像到小程序的用户数据路径
-        console.log(filePath);
-        this.setData({
-          count: parseInt(count) + 1
-        });
-        console.log(count);
-        let oldFilePath = `${wx.env.USER_DATA_PATH}/modified_image${(parseInt(count) - 1)}.png`; // 注意路径 
-        console.log(oldFilePath);
+        let count = ``;
+        let filePath = ``; // 保存图像到小程序的用户数据路径
+        let oldFilePath = ``;
+        if(this.data.fixEnable == 'false'){
+          count = this.data.gifcount
+          filePath = `${wx.env.USER_DATA_PATH}/modified_image${count}.gif`;
+          this.setData({
+            gifcount: parseInt(count) + 1
+          });
+          oldFilePath = `${wx.env.USER_DATA_PATH}/modified_image${(parseInt(count) - 1)}.gif`;
+        }
+        else{
+          count = this.data.jpgcount
+          filePath = `${wx.env.USER_DATA_PATH}/modified_image${count}.jpg`;
+          this.setData({
+            jpgcount: parseInt(count) + 1
+          });
+          oldFilePath = `${wx.env.USER_DATA_PATH}/modified_image${(parseInt(count) - 1)}.jpg`;
+        }
+        // console.log(filePath);
+        // this.setData({
+        //   count: parseInt(count) + 1
+        // });
+        // console.log(count);
+        // let oldFilePath = `${wx.env.USER_DATA_PATH}/modified_image${(parseInt(count) - 1)}.png`; // 注意路径 
+        // console.log(oldFilePath);
         
         // 判断文件/目录是否存在
-        fs.access({
-          path: oldFilePath,
-          success(res) {
-            // 文件存在
-            console.log(res);
-            fs.unlink({
-              filePath: oldFilePath,
-              success(res) {
-                console.log(res);
-              },
-              fail(res) {
-                console.error(res);
-              }
-            });
-          }
-        });
+        // fs.access({
+        //   path: oldFilePath,
+        //   success(res) {
+        //     // 文件存在
+        //     console.log(res);
+        //     fs.unlink({
+        //       filePath: oldFilePath,
+        //       success(res) {
+        //         console.log(res);
+        //       },
+        //       fail(res) {
+        //         console.error(res);
+        //       }
+        //     });
+        //   }
+        // });
         
         // 使用 wx.base64ToArrayBuffer 将 base64 编码的数据转换为 ArrayBuffer
         let buffer = wx.base64ToArrayBuffer(base64Data);
@@ -572,7 +634,7 @@ Page({
               imageSrc: filePath, // 更新 imageSrc 为本地文件路径
             });
             wx.showToast({
-              title: 'Image modified successfully!',
+              title: '生成成功',
               icon: 'success',
               duration: 2000
             });
@@ -638,7 +700,7 @@ Page({
 
     if (!imageSrc) {
       wx.showToast({
-        title: 'No image to save',
+        title: '没有图片',
         icon: 'none',
         duration: 2000
       });
@@ -649,7 +711,7 @@ Page({
       filePath: imageSrc,
       success() {
         wx.showToast({
-          title: 'Image saved!',
+          title: '保存成功！',
           icon: 'success',
           duration: 2000
         });
@@ -657,7 +719,7 @@ Page({
       fail(err) {
         console.log(err);
         wx.showToast({
-          title: 'Save failed',
+          title: '保存失败',
           icon: 'none',
           duration: 2000
         });

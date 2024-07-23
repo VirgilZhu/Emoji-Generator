@@ -3,10 +3,10 @@
     <image class="btnUploadImg" src='./image/upload.png' alt="Upload Icon"></image>
     <view>上传</view>
   </button>
-  <button style="width:28vw" class="btnCut" bindtap="startCrop" disabled="{{!imageSrc}}">
+  <!-- <button style="width:28vw" class="btnCut" bindtap="startCrop" disabled="{{!cropEnable}}">
     <image class="btnUploadImg" src='./image/cut.png' alt="Upload Icon"></image>
     <view>裁剪</view>
-  </button>
+  </button> -->
   <button style="width:28vw" class="btnSaved" bindtap="saveImage" disabled="{{!imageSrc}}">
     <image class="btnSaveImg" src='./image/save.png' alt="Upload Icon"></image>
     <view>保存</view>
@@ -56,7 +56,7 @@
     <image data-type="play" data-typecn="猫猫虫" data-index="12" data-text="false" data-fix="false" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 12 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/play.gif' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="guichu" data-typecn="鬼畜" data-index="13" data-text="true" data-fix="false" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 13 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/guichu.gif' alt="Upload Icon"></image>
+    <image data-type="guichu" data-typecn="鬼畜" data-index="13" data-text="false" data-fix="false" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 13 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/guichu.gif' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
     <image data-type="funnymirror" data-typecn="大怨种" data-index="14" data-text="false" data-fix="false" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 14 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/funny_mirror.gif' alt="Upload Icon"></image>
@@ -68,7 +68,10 @@
     <image data-type="flashblind" data-typecn="闪烁" data-index="16" data-text="true" data-fix="false" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 16 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/flash_blind.gif' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="trance" data-typecn="模糊" data-index="17" data-text="false" data-fix="true" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 17 ? 'selected' : ''}}" src='./image/trance.jpg' alt="Upload Icon"></image>
+    <image data-type="confuse" data-typecn="思考" data-index="17" data-text="false" data-fix="false" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 17 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/confuse.gif' alt="Upload Icon"></image>
+  </view>
+  <view class="select-item">
+    <image data-type="trance" data-typecn="模糊" data-index="18" data-text="false" data-fix="true" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 18 ? 'selected' : ''}}" src='./image/trance.jpg' alt="Upload Icon"></image>
   </view>
 
   </scroll-view>
@@ -84,7 +87,7 @@
   </view>
   </view>
 <!-- 裁剪功能 -->
-<view  id="parentContainer" class="container" wx:if="{{page==='cropPage'}}" >
+<view  id="parentContainer"  class="container" wx:if="{{page==='cropPage'}}" >
    <!-- 隐藏canvas 保存图片用 -->
    <canvas canvas-id="tempCanvas" disable-scroll="true" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px; position:absolute;left:-999999px"></canvas>
   <!-- <button style="width:25vw" class="btnUpload" bindtap="chooseImage">
