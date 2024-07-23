@@ -7,7 +7,7 @@ Page({
     selectedStyleCN: '无',
     selectedStyleIndex: -1,
     textBoxes: [''],
-    imageUrl: 'image/style2.png',
+    imageUrl: '',
     currIndex: app.globalData.currIndex
   },
   onLoad(options) {
@@ -40,18 +40,18 @@ Page({
     let textBoxes = [];
     const type = this.data.selectedStyle;
     switch (type) {
-      case 'igiari':
-        textBoxes = [{value: "", placeholder: "输入不超过6个字"}];
-        break;
-      case 'ba':
-        textBoxes = [{value: "", placeholder: '蓝色文字'},{value: "", placeholder: '黑色文字'}];
-        break;
-      case '5000choyen':
-        textBoxes = [{value: "", placeholder: '红色文字'},{value: "", placeholder: '银色文字'}];
-        break;
-      case 'luxun':
-        textBoxes = [{value: "", placeholder: "请输入文字"}];
-        break;
+      // case 'igiari':
+      //   textBoxes = [{value: "", placeholder: "输入不超过6个字"}];
+      //   break;
+      // case 'ba':
+      //   textBoxes = [{value: "", placeholder: '蓝色文字'},{value: "", placeholder: '黑色文字'}];
+      //   break;
+      // case '5000choyen':
+      //   textBoxes = [{value: "", placeholder: '红色文字'},{value: "", placeholder: '银色文字'}];
+      //   break;
+      // case 'luxun':
+      //   textBoxes = [{value: "", placeholder: "请输入文字"}];
+      //   break;
       case 'ecnulion':
         textBoxes = [{value: "", placeholder: "输入不超过6个字"}];
         break;
@@ -65,27 +65,6 @@ Page({
     //   textBoxes.push("");
     // }
     this.setData({
-      textBoxes: textBoxes
-    });
-  },
-  onStyleChange(e) {  // 把picker去掉之后删掉该函数
-    const selectedStyle = this.data.styleOptions[e.detail.value];
-    let textBoxes = [];
-
-    // for (let i = 0; i < this.data.num_textboxes; i++){
-    //   textBoxes.push("");
-    // }
-    // // 根据选择的样式设置文本框数量
-    // if (selectedStyle === 'Style 1') {
-    //   textBoxes = [''];
-    // } else if (selectedStyle === 'Style 2') {
-    //   textBoxes = ['红色文字', '银色文字'];
-    // } else if (selectedStyle === 'Style 3') {
-    //   textBoxes = ['', '', ''];
-    // }
-
-    this.setData({
-      selectedStyle: selectedStyle,
       textBoxes: textBoxes
     });
   },

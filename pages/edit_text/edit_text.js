@@ -7,7 +7,7 @@ Page({
     selectedStyleCN: '无',
     selectedStyleIndex: -1,
     textBoxes: [''],
-    imageUrl: 'image/style2.png',
+    imageUrl: '',
     currIndex: app.globalData.currIndex
   },
   onLoad(options) {
@@ -142,24 +142,24 @@ Page({
           text: this.data.textBoxes[0]
         };
         break;
-      case 'ecnulion':
-        requestType = '/ecnulion';
-        requestData = {
-          text: this.data.textBoxes[0]
-        };
-        break;
-      case 'ecnublackboard':
-        requestType = '/ecnublackboard';
-        requestData = {
-          text: this.data.textBoxes[0]
-        };
-        break;
+      // case 'ecnulion':
+      //   requestType = '/ecnulion';
+      //   requestData = {
+      //     text: this.data.textBoxes[0]
+      //   };
+      //   break;
+      // case 'ecnublackboard':
+      //   requestType = '/ecnublackboard';
+      //   requestData = {
+      //     text: this.data.textBoxes[0]
+      //   };
+      //   break;
       default:
         break;
     }
 
     wx.request({
-      url: `http://39.105.8.203${url}`, // 替换为你的后端接口
+      url: `http://39.105.8.203${requestType}`, // 替换为你的后端接口
       method: 'POST',
       data: requestData,
       success: (res) => {

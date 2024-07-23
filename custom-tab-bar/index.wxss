@@ -17,6 +17,7 @@ page{
 
 .tabbar-box {
   background: #fff;
+  border-top: 10rpx solid rgb(163, 217, 248);
   border-radius: 10rpx 10rpx 0 0;
   position: relative;
   height: 120rpx;
