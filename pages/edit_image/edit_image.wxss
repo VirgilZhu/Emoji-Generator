@@ -5,6 +5,7 @@
   overflow: hidden;
 }
 
+
 .imageView{
   width:750rpx;
   text-align: center;
@@ -50,7 +51,20 @@
   background-color: rgb(166, 223, 33);
   margin: 10px;
 }
-
+.green-button1 {
+  background-color: #4CAF50; /* 绿色背景 */
+  color: white;             /* 白色文字 */
+  border: none;             /* 无边框 */
+  padding: 15px 32px;       /* 内边距 */
+  text-align: center;       /* 文字居中 */
+  text-decoration: none;    /* 无下划线 */
+  display: flex;    /* 内联块元素 */
+  font-size: 16px;          /* 字体大小 */
+  margin: 4px 2px;          /* 外边距 */
+  cursor: pointer;          /* 鼠标悬停时的光标样式 */
+  border-radius: 4px;       /* 圆角边框 */
+  justify-content: center;
+}
 .grayscale {
   filter: grayscale(100%);
 }
