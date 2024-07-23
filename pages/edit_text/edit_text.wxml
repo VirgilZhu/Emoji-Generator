@@ -10,7 +10,7 @@
   <!-- 样式选择横向滚动条 -->
   <scroll-view class="style-select" scroll-x>
     <view class="select-item">
-      <image data-type="igiari" data-typecn="我有异议" data-index="0" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 0 ? 'selected' : ''}}" src='./image/style1.png'></image>
+      <image data-type="igiari" data-typecn="我有异议" data-index="0" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 0 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/style1.png'></image>
     </view>
     <view class="select-item">
       <image data-type="ba" data-typecn="碧蓝档案标题" data-index="1" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 1 ? 'selected' : ''}}" src='./image/bluearchive.jpg'></image>
