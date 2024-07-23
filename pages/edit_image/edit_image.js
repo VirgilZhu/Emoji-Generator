@@ -382,7 +382,10 @@ Page({
     const that = this;
     const fs = wx.getFileSystemManager();
     let base64 = fs.readFileSync(this.data.originSrc, 'base64');
-    let secondbase64 = fs.readFileSync(this.data.secondoriginSrc, 'base64');
+    let secondbase64 = "";
+    if(this.data.secondoriginSrc){
+      secondbase64 = fs.readFileSync(this.data.secondoriginSrc, 'base64');
+    }
     const type = this.data.selectedStyle;
     let requestPayload = {};
     let requestType = type;
@@ -591,11 +594,15 @@ Page({
     const typeCN = e.currentTarget.dataset.typecn;
     const index = parseInt(e.currentTarget.dataset.index);
     const text = e.currentTarget.dataset.text;
+    const fix = e.currentTarget.dataset.fix;
+    const second = e.currentTarget.dataset.second;
     this.setData({
       selectedStyle: type,
       selectedStyleCN: typeCN,
       selectedStyleIndex: index,
-      textEnable: text
+      textEnable: text,
+      fixEnable: fix,
+      secondimageEnable: second
     });
     console.log(this.data.selectedStyle);
     console.log(this.data.selectedStyleIndex);

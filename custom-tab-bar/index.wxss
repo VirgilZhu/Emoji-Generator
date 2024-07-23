@@ -3,7 +3,7 @@
 page{
   /* --color: rgb(172, 97, 97);
   --bg: orange;
-  --w: 175rpx;
+  --w: 350rpx;
   --t: 750rpx;
   --c: 120rpx; */
   --t: 750rpx;
@@ -37,7 +37,7 @@ page{
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 175rpx;
+  width: 350rpx;
   height: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -70,8 +70,8 @@ page{
   width: 120rpx;
   height: 120rpx;
   background: orange;
-  --left-pad: calc(750rpx - (4 * 175rpx));
-  left: calc((var(--left-pad) / 2) + (175rpx / 2) - (120rpx / 2));
+  --left-pad: calc(750rpx - (2 * 350rpx));
+  left: calc((var(--left-pad) / 2) + (350rpx / 2) - (120rpx / 2));
   top: calc(-50% + constant(safe-area-inset-bottom) / 2);
   top: calc(-50% + env(safe-area-inset-bottom) / 2);
   border-radius: 50%;
@@ -98,5 +98,5 @@ page{
   box-shadow: 0 -15rpx 0 0 rgb(163, 217, 248);
 }
 .active-tabbar-box {
-  transform: translateX(calc(175rpx * var(--i)));
+  transform: translateX(calc(350rpx * var(--i)));
 }

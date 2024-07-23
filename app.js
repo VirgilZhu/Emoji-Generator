@@ -21,7 +21,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    currIndex: 0
+    currIndex: 1
   },
   onMyEvent: function(data) {
     console.log("接收到的全局事件数据：", data);

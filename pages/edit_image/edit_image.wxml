@@ -16,59 +16,59 @@
 
   <scroll-view hidden="{{isHidden}}" class="style-select"  scroll-x >
   <view class="select-item">
-    <image data-type="graywordmeme" data-typecn="黑白加字" data-index="0" data-text="true" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 0 ? 'selected' : ''}}" src='./image/graywordmeme.png' alt="Upload Icon"></image>
+    <image data-type="graywordmeme" data-typecn="黑白加字" data-index="0" data-text="true" data-fix="true" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 0 ? 'selected' : ''}}" src='./image/graywordmeme.png' alt="Upload Icon"></image>
     <text></text>
   </view>
   <view class="select-item">
-    <image data-type="always" data-typecn="要我一直这样吗" data-index="1" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 1 ? 'selected' : ''}}" src='./image/always.png' alt="Upload Icon"></image>
+    <image data-type="always" data-typecn="要我一直这样吗" data-index="1" data-text="false" data-fix="true" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 1 ? 'selected' : ''}}" src='./image/always.png' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="fightsunuo" data-typecn="我打宿傩？" data-index="2" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 2 ? 'selected' : ''}}" src='./image/fightsunuo.jpg' alt="Upload Icon"></image>
+    <image data-type="fightsunuo" data-typecn="我打宿傩？" data-index="2" data-text="false" data-fix="true" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 2 ? 'selected' : ''}}" src='./image/fightsunuo.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="cannot" data-typecn="加载不出来" data-index="3" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 3 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/cantload.png' alt="Upload Icon"></image> 
+    <image data-type="cannot" data-typecn="加载不出来" data-index="3" data-text="false" data-fix="true" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 3 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/cantload.png' alt="Upload Icon"></image> 
   </view>
   <view class="select-item">
-    <image data-type="animegen_gqj" data-typecn="宫崎骏风格" data-index="4" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 4 ? 'selected' : ''}}" src='./image/animegen_gqj.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_gqj" data-typecn="宫崎骏风格" data-index="4" data-text="false" data-fix="true" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 4 ? 'selected' : ''}}" src='./image/animegen_gqj.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_xhc" data-typecn="新海诚风格" data-index="5" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 5 ? 'selected' : ''}}" src='./image/animegen_xhc.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_xhc" data-typecn="新海诚风格" data-index="5" data-text="false" data-fix="true" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 5 ? 'selected' : ''}}" src='./image/animegen_xhc.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_rbf" data-typecn="日本画风格" data-index="6" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 6 ? 'selected' : ''}}" src='./image/animegen_rbf.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_rbf" data-typecn="日本画风格" data-index="6" data-text="false" data-fix="true" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 6 ? 'selected' : ''}}" src='./image/animegen_rbf.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_smf" data-typecn="素描风" data-index="7" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 7 ? 'selected' : ''}}" src='./image/animegen_smf.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_smf" data-typecn="素描风" data-index="7" data-text="false" data-fix="true" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 7 ? 'selected' : ''}}" src='./image/animegen_smf.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="bodysegment" data-typecn="人体识别" data-index="8" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 8 ? 'selected' : ''}}" src='./image/bodysegment.jpg' alt="Upload Icon"></image>
+    <image data-type="bodysegment" data-typecn="人体识别" data-index="8" data-text="false" data-fix="true" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 8 ? 'selected' : ''}}" src='./image/bodysegment.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="kiss" data-typecn="亲亲" data-index="9" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 9 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/kiss.gif' alt="Upload Icon"></image>
+    <image data-type="kiss" data-typecn="亲亲" data-index="9" data-text="false" data-fix="false" data-second="true" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 9 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/kiss.gif' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="rub" data-typecn="贴贴" data-index="10" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 10 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/rub.gif' alt="Upload Icon"></image>
+    <image data-type="rub" data-typecn="贴贴" data-index="10" data-text="false" data-fix="false" data-second="true" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 10 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/rub.gif' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="punch" data-typecn="小拳拳锤你" data-index="11" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 11 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/punch.gif' alt="Upload Icon"></image> 
+    <image data-type="punch" data-typecn="小拳拳锤你" data-index="11" data-text="false" data-fix="false" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 11 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/punch.gif' alt="Upload Icon"></image> 
   </view>
   <view class="select-item">
-    <image data-type="play" data-typecn="Capoo" data-index="12" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 12 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/play.gif' alt="Upload Icon"></image>
+    <image data-type="play" data-typecn="猫猫虫" data-index="12" data-text="false" data-fix="false" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 12 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/play.gif' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="guichu" data-typecn="鬼畜" data-index="13" data-text="true" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 13 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/guichu.gif' alt="Upload Icon"></image>
+    <image data-type="guichu" data-typecn="鬼畜" data-index="13" data-text="true" data-fix="false" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 13 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/guichu.gif' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="funnymirror" data-typecn="大怨种" data-index="14" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 14 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/funny_mirror.gif' alt="Upload Icon"></image>
+    <image data-type="funnymirror" data-typecn="大怨种" data-index="14" data-text="false" data-fix="false" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 14 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/funny_mirror.gif' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="chasetrain" data-typecn="追火车" data-index="15" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 15 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/chase_train.gif' alt="Upload Icon"></image>
+    <image data-type="chasetrain" data-typecn="追火车" data-index="15" data-text="false" data-fix="false" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 15 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/chase_train.gif' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="flashblind" data-typecn="闪烁" data-index="16" data-text="true" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 16 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/flash_blind.gif' alt="Upload Icon"></image>
+    <image data-type="flashblind" data-typecn="闪烁" data-index="16" data-text="true" data-fix="false" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 16 ? 'selected' : ''}}" src='http://sh373q9yg.hd-bkt.clouddn.com/flash_blind.gif' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="trance" data-typecn="模糊" data-index="17" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 17 ? 'selected' : ''}}" src='./image/trance.jpg' alt="Upload Icon"></image>
+    <image data-type="trance" data-typecn="模糊" data-index="17" data-text="false" data-fix="true" data-second="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 17 ? 'selected' : ''}}" src='./image/trance.jpg' alt="Upload Icon"></image>
   </view>
 
   </scroll-view>

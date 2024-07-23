@@ -8,6 +8,7 @@ Page({
     selectedStyleIndex: -1,
     textBoxes: [''],
     imageUrl: '',
+    count: '0',
     currIndex: app.globalData.currIndex
   },
   onLoad(options) {
@@ -63,27 +64,6 @@ Page({
       textBoxes: textBoxes
     });
   },
-  onStyleChange(e) {  // 把picker去掉之后删掉该函数
-    const selectedStyle = this.data.styleOptions[e.detail.value];
-    let textBoxes = [];
-
-    // for (let i = 0; i < this.data.num_textboxes; i++){
-    //   textBoxes.push("");
-    // }
-    // // 根据选择的样式设置文本框数量
-    // if (selectedStyle === 'Style 1') {
-    //   textBoxes = [''];
-    // } else if (selectedStyle === 'Style 2') {
-    //   textBoxes = ['红色文字', '银色文字'];
-    // } else if (selectedStyle === 'Style 3') {
-    //   textBoxes = ['', '', ''];
-    // }
-
-    this.setData({
-      selectedStyle: selectedStyle,
-      textBoxes: textBoxes
-    });
-  },
   style_select(e) {
     const type = e.currentTarget.dataset.type;
     const typeCN = e.currentTarget.dataset.typecn;
@@ -130,7 +110,7 @@ Page({
         };
         break;
       case '5000choyen':
-        url = '/colorful';
+        requestType = '/colorful';
         requestData = {
           text1: this.data.textBoxes[0],
           text2: this.data.textBoxes[1]
@@ -142,39 +122,61 @@ Page({
           text: this.data.textBoxes[0]
         };
         break;
-      // case 'ecnulion':
-      //   requestType = '/ecnulion';
-      //   requestData = {
-      //     text: this.data.textBoxes[0]
-      //   };
-      //   break;
-      // case 'ecnublackboard':
-      //   requestType = '/ecnublackboard';
-      //   requestData = {
-      //     text: this.data.textBoxes[0]
-      //   };
-      //   break;
+      case 'ecnulion':
+        requestType = '/ecnulion';
+        requestData = {
+          text: this.data.textBoxes[0]
+        };
+        break;
+      case 'ecnublackboard':
+        requestType = '/ecnublackboard';
+        requestData = {
+          text: this.data.textBoxes[0]
+        };
+        break;
       default:
         break;
     }
-
+    console.log(requestData)
     wx.request({
-      // url: `http://39.105.8.203${requestType}`, 
-      url: `http://127.0.0.1:5000${requestType}`,// 替换为你的后端接口
+      url: `http://39.105.8.203${requestType}`, 
+      // url: `http://127.0.0.1:5000${requestType}`,// 替换为你的后端接口
       method: 'POST',
       data: requestData,
       success: (res) => {
         let base64Data = res.data.result;
-        console.log(res.data.msg);
-        let filePath = `${wx.env.USER_DATA_PATH}/text_meme.png`;
-        console.log(filePath);
+        console.log(res)
+        console.log(res.data.msg)
 
+        // 检查 base64Data 是否为有效的 Base64 字符串
+        // if (!base64Data || !/^[A-Za-z0-9+/=]+$/.test(base64Data)) {
+        //   console.error('Invalid Base64 string:', base64Data);
+        //   wx.showToast({
+        //     title: 'Invalid Base64 data',
+        //     icon: 'error',
+        //     duration: 2000
+        //   });
+        //   return;
+        // }
+
+        let count = this.data.count;
+        let filePath = `${wx.env.USER_DATA_PATH}/modified_image${count}.png`; // 保存图像到小程序的用户数据路径
+        console.log(filePath);
+        this.setData({
+          count: parseInt(count) + 1
+        });
+        console.log(count);
+        let oldFilePath = `${wx.env.USER_DATA_PATH}/modified_image${(parseInt(count) - 1)}.png`; // 注意路径 
+        console.log(oldFilePath);
+        
+        // 判断文件/目录是否存在
         fs.access({
-          path: filePath,
+          path: oldFilePath,
           success(res) {
+            // 文件存在
             console.log(res);
             fs.unlink({
-              filePath: filePath,
+              filePath: oldFilePath,
               success(res) {
                 console.log(res);
               },
@@ -184,7 +186,8 @@ Page({
             });
           }
         });
-
+        
+        // 使用 wx.base64ToArrayBuffer 将 base64 编码的数据转换为 ArrayBuffer
         let buffer = wx.base64ToArrayBuffer(base64Data);
 
         fs.writeFile({
@@ -193,16 +196,16 @@ Page({
           encoding: 'binary',
           success: () => {
             that.setData({
-              imageUrl: filePath, 
+              imageUrl: filePath, // 更新 imageSrc 为本地文件路径
             });
             wx.showToast({
-              title: 'Meme generated successfully!',
+              title: 'Image modified successfully!',
               icon: 'success',
               duration: 2000
             });
           },
           fail: (err) => {
-            console.error('Failed to save generate meme:', err);
+            console.error('Failed to save modified image:', err);
           }
         });
       },
