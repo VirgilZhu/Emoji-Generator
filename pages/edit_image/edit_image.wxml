@@ -53,10 +53,10 @@
     <image data-type="punch" data-typecn="小拳拳锤你" data-index="11" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 11 ? 'selected' : ''}}" src='./image/punch.gif' alt="Upload Icon"></image> 
   </view>
   <view class="select-item">
-    <image data-type="play" data-typecn="Capoo" data-index="12" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 12 ? 'selected' : ''}}" src='./image/play.gif' alt="Upload Icon"></image>
+    <image data-type="play" data-typecn="猫猫虫" data-index="12" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 12 ? 'selected' : ''}}" src='./image/play.gif' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="guichu" data-typecn="鬼畜" data-index="13" data-text="true" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 13 ? 'selected' : ''}}" src='./image/guichu.gif' alt="Upload Icon"></image>
+    <image data-type="guichu" data-typecn="鬼畜（输入上/下/左/右）" data-index="13" data-text="true" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 13 ? 'selected' : ''}}" src='./image/guichu.gif' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
     <image data-type="funnymirror" data-typecn="大怨种" data-index="14" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 14 ? 'selected' : ''}}" src='./image/funny_mirror.gif' alt="Upload Icon"></image>

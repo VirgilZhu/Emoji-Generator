@@ -13,16 +13,16 @@ Component({
         icon: "icon-manage",
         pagePath: "/pages/edit_image/edit_image"
       },
-      {
-        name: "ECNU",
-        icon: "icon-manage",
-        pagePath: "/pages/ecnulion/ecnu"
-      },
-      {
-        name: "动图",
-        icon: "icon-manage", // todo
-        pagePath: "/pages/gifs/gifs"
-      }
+      // {
+      //   name: "ECNU",
+      //   icon: "icon-manage",
+      //   pagePath: "/pages/ecnulion/ecnu"
+      // },
+      // {
+      //   name: "动图",
+      //   icon: "icon-manage", // todo
+      //   pagePath: "/pages/gifs/gifs"
+      // }
     ]
   },
   attached(){
