@@ -1,4 +1,11 @@
 <view class="container">
+  <!-- <image src='./image/example.png'></image> -->
+  <button style="width:28vw" class="btnSaved" bindtap="saveImage" disabled="{{!imageUrl}}">
+    <image class="btnSaveImg" src='./image/save.png' alt="Upload Icon"></image>
+    <view>保存</view>
+  </button>
+  
+  <image src="{{imageUrl || './image/example.png'}}" mode="aspectFit" class="image-box" style="width: 80%; max-width: 300px; margin-bottom: 0;"></image>
 
   <!-- 样式选择横向滚动条 -->
   <scroll-view class="style-select" scroll-x>
@@ -14,39 +21,24 @@
     <view class="select-item">
       <image data-type="luxun" data-typecn="鲁迅说过" data-index="3" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 3 ? 'selected' : ''}}" src='./image/luxun.png'></image>
     </view>
-    <view class="select-item">
+    <!-- <view class="select-item">
       <image data-type="ecnulion" data-typecn="花狮举牌子" data-index="4" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 4 ? 'selected' : ''}}" src='./image/ecnulion.png'></image>
     </view>
     <view class="select-item">
       <image data-type="ecnublackboard" data-typecn="花狮敲黑板" data-index="5" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 5 ? 'selected' : ''}}" src='./image/blackboard.png'></image>
-    </view>
-    <!-- Add more styles as needed -->
+    </view> -->
   </scroll-view>
-
-
-  <!-- <picker mode="selector" range="{{styleOptions}}" bindchange="onStyleChange">
-    <view class="picker">
-      <text>选择样式: {{selectedStyle}}</text>
-    </view>
-  </picker> -->
 
   <text class="showtype">选择样式：{{selectedStyleCN}}</text>
 
   <view class="input-container">
     <block wx:for="{{textBoxes}}" wx:key="index">
       <view class="input-box">
-        <textarea placeholder="{{item.placeholder}}" bindinput="onTextInput" data-index="{{index}}" value="{{item.value}}"></textarea>
+        <textarea class="input-text" placeholder="{{item.placeholder}}" bindinput="onTextInput" data-index="{{index}}"></textarea>
       </view>
     </block>
   </view>
 
-  <button class="submit-button" bindtap="submitText">提交</button>
-  <block wx:if="{{imageUrl}}">
-    <image src="{{imageUrl}}" mode="aspectFit"></image>  
-  </block>
+  <button class="submit-button" bindtap="submitText">生成</button>
 
-  <view wx:if="{{imageUrl}}">
-    <image class="preview-image" src="{{imageUrl}}" mode="aspectFit"></image>
-    <button class="save-button" bindtap="saveImage">保存图片</button>
-  </view>
 </view>
