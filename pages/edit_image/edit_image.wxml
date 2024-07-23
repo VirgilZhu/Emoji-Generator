@@ -66,7 +66,7 @@
     </picker> -->
     <text class="showtype">样式：{{selectedStyleCN}}</text>
     <textarea wx:if="{{textEnable==='true'}}" placeholder="请输入文字" bindinput="inputTextChange" class="input-text"></textarea>
-    <!-- <button class="green-button" bindtap="applyText">请输入文字</button> -->
+    <button class="green-button" bindtap="edit_this">修改当前</button>
     <button class="green-button" bindtap="always_test">生成</button>
     <canvas canvas-id="myCanvas" style="display:none;" width="{{canvasWidth}}" height="{{canvasHeight}}"></canvas>
 

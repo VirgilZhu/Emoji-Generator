@@ -25,5 +25,8 @@ App({
   },
   onMyEvent: function(data) {
     console.log("接收到的全局事件数据：", data);
-  }
+  },
+  // onHide() {
+  //   wx.clearStorage()
+  // }
 })

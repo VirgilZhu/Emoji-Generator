@@ -499,7 +499,13 @@ Page({
       }
     });
   },
-
+  edit_this() {
+    const that = this;
+    that.setData({
+      originSrc: this.data.imageSrc,
+      count: parseInt(this.count) + 1
+    })
+  },
   style_select(e) {
     const type = e.currentTarget.dataset.type; 
     const typeCN = e.currentTarget.dataset.typecn;
