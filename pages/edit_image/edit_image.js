@@ -1,3 +1,5 @@
+const app = getApp();
+
 Page({
   data: {
     imageSrc: '',
@@ -12,9 +14,20 @@ Page({
     baseImg: '',
     test1: '1',
     isHidden: true,
-    count: '0'
+    count: '0',
+    currIndex: app.globalData.currIndex
+  },
+  onLoad(options) {
+    const that = this;
+    app.onMyEvent = function(data) {
+      console.log("接收到的数据：", data);
+      that.setData({currIndex: data})
+    }
   },
   onShow(){
+    this.setData({
+      currIndex: app.globalData.currIndex
+    });
     if (typeof this.getTabBar === 'function' && this.getTabBar()){
       this.getTabBar().setData({
         currIndex: 1

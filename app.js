@@ -1,5 +1,6 @@
 // app.js
 require('./utils/v-request.js');
+import './utils/eventBus'
 
 App({
   onLaunch() {
@@ -19,6 +20,10 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    currIndex: 0
+  },
+  onMyEvent: function(data) {
+    console.log("接收到的全局事件数据：", data);
   }
 })

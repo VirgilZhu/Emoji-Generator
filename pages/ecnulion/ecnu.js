@@ -11,6 +11,11 @@ Page({
     currIndex: app.globalData.currIndex
   },
   onLoad(options) {
+    // wx.$event.on("currIndexUpdate", this, (index) => {
+    //   console.info(`接收到的内容${text}`)
+    //   //修改标题
+    //   this.setData({currIndex: index});
+    // });
     const that = this;
     app.onMyEvent = function(data) {
       console.log("接收到的数据：", data);
@@ -22,9 +27,9 @@ Page({
       currIndex: app.globalData.currIndex
     });
     if (typeof this.getTabBar === 'function' && this.getTabBar()){
-      // app.globalData.currIndex = 0;
+      // app.globalData.currIndex = 2;
       this.getTabBar().setData({
-        currIndex: 0
+        currIndex: 2
       });
     }
   },
