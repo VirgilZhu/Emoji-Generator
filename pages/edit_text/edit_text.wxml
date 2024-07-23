@@ -21,12 +21,12 @@
     <view class="select-item">
       <image data-type="luxun" data-typecn="鲁迅说过" data-index="3" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 3 ? 'selected' : ''}}" src='./image/luxun.png'></image>
     </view>
-    <!-- <view class="select-item">
+    <view class="select-item">
       <image data-type="ecnulion" data-typecn="花狮举牌子" data-index="4" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 4 ? 'selected' : ''}}" src='./image/ecnulion.png'></image>
     </view>
     <view class="select-item">
       <image data-type="ecnublackboard" data-typecn="花狮敲黑板" data-index="5" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 5 ? 'selected' : ''}}" src='./image/blackboard.png'></image>
-    </view> -->
+    </view>
   </scroll-view>
 
   <text class="showtype">选择样式：{{selectedStyleCN}}</text>

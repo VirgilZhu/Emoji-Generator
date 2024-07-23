@@ -63,27 +63,6 @@ Page({
       textBoxes: textBoxes
     });
   },
-  onStyleChange(e) {  // 把picker去掉之后删掉该函数
-    const selectedStyle = this.data.styleOptions[e.detail.value];
-    let textBoxes = [];
-
-    // for (let i = 0; i < this.data.num_textboxes; i++){
-    //   textBoxes.push("");
-    // }
-    // // 根据选择的样式设置文本框数量
-    // if (selectedStyle === 'Style 1') {
-    //   textBoxes = [''];
-    // } else if (selectedStyle === 'Style 2') {
-    //   textBoxes = ['红色文字', '银色文字'];
-    // } else if (selectedStyle === 'Style 3') {
-    //   textBoxes = ['', '', ''];
-    // }
-
-    this.setData({
-      selectedStyle: selectedStyle,
-      textBoxes: textBoxes
-    });
-  },
   style_select(e) {
     const type = e.currentTarget.dataset.type;
     const typeCN = e.currentTarget.dataset.typecn;
@@ -142,18 +121,18 @@ Page({
           text: this.data.textBoxes[0]
         };
         break;
-      // case 'ecnulion':
-      //   requestType = '/ecnulion';
-      //   requestData = {
-      //     text: this.data.textBoxes[0]
-      //   };
-      //   break;
-      // case 'ecnublackboard':
-      //   requestType = '/ecnublackboard';
-      //   requestData = {
-      //     text: this.data.textBoxes[0]
-      //   };
-      //   break;
+      case 'ecnulion':
+        requestType = '/ecnulion';
+        requestData = {
+          text: this.data.textBoxes[0]
+        };
+        break;
+      case 'ecnublackboard':
+        requestType = '/ecnublackboard';
+        requestData = {
+          text: this.data.textBoxes[0]
+        };
+        break;
       default:
         break;
     }
