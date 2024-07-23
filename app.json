@@ -2,6 +2,8 @@
   "pages": [
     "pages/edit_image/edit_image",
     "pages/edit_text/edit_text",
+    "pages/gifs/gifs",
+    "pages/ecnulion/ecnu",
     "pages/index/index",
     "pages/logs/logs"
   ],
@@ -18,8 +20,15 @@
       {
         "pagePath": "pages/edit_image/edit_image",
         "text": "edit_image"
+      },
+      {
+        "pagePath": "pages/ecnulion/ecnu",
+        "text": "ecnu"
+      },
+      {
+        "pagePath": "pages/gifs/gifs",
+        "text": "gifs"
       }
-
     ]
   },
   "usingComponents": {},

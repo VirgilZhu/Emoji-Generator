@@ -26,13 +26,29 @@
   margin-bottom: 0;
 }
 
-.picker {
-  /* margin-top: 20px; */
+/* .picker {
+  margin-top: 20px; 
   padding: 10px;
   background-color: rgb(158, 204, 51);
   color: white;
   border-radius: 5px;
   text-align: center;
+} */
+
+.showtype {
+  padding: 10px 20px;
+  border: 1px solid rgb(0, 132, 255);
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 20px;
+  font-size: 16px;
+  color:white;
+  background-color: rgb(158, 204, 51);
+  margin: 10px;
 }
 
 .grayscale {
@@ -147,18 +163,29 @@
 }
 
 .select-item{
-  width:160rpx;
+  width: 160rpx;
   height: 150rpx;
   display: inline-block;
   background-color: rgb(244, 245, 245);
+  border: 2px solid rgb(244, 245, 245);
+  margin: 5rpx;
+  box-sizing: border-box;
 }
 
 .selectpng{
   width: 150rpx;
   height: 150rpx;
   position: relative;
-  left: 5px; 
+  right: 5px; 
   top: 0px;
+}
+
+.selected {
+  border: 2px solid red;
+}
+
+.selected {
+  border: 2px solid red;
 }
 
 .corpper-view-box{

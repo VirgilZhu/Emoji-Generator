@@ -12,33 +12,36 @@
     <view>保存</view>
   </button>
 
-  <image src="{{imageSrc || './image/cam.webp'}}" mode="aspectFit" class="preview-image {{selectedStyle}}"></image>
+  <image src="{{imageSrc || './image/cam.webp'}}" mode="aspectFit" catch:tap="chooseImage" class="preview-image {{selectedStyle}}"></image>
 
   <scroll-view hidden="{{isHidden}}" class="style-select"  scroll-x >
   <view class="select-item">
-    <image data-type="graywordmeme" data-text="true" bind:tap="style_select" class="selectpng" src='./image/graywordmeme.png' alt="Upload Icon"></image>
+    <image data-type="graywordmeme" data-typecn="黑白加字" data-index="0" data-text="true" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 0 ? 'selected' : ''}}" src='./image/graywordmeme.png' alt="Upload Icon"></image>
     <text></text>
   </view>
   <view class="select-item">
-    <image data-type="always" data-text="false" bind:tap="style_select" class="selectpng" src='./image/always.png' alt="Upload Icon"></image>
+    <image data-type="always" data-typecn="要我一直这样吗" data-index="1" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 1 ? 'selected' : ''}}" src='./image/always.png' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="fightsunuo" data-text="false" bind:tap="style_select" class="selectpng" src='./image/fightsunuo.jpg' alt="Upload Icon"></image>
+    <image data-type="fightsunuo" data-typecn="我打宿傩？" data-index="2" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 2 ? 'selected' : ''}}" src='./image/fightsunuo.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_gqj" data-text="false" bind:tap="style_select" class="selectpng" src='./image/animegen_gqj.jpg' alt="Upload Icon"></image>
+    <image data-type="cannot" data-typecn="加载不出来" data-index="3" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 3 ? 'selected' : ''}}" src='./image/cantload.png' alt="Upload Icon"></image> 
   </view>
   <view class="select-item">
-    <image data-type="animegen_xhc" data-text="false" bind:tap="style_select" class="selectpng" src='./image/animegen_xhc.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_gqj" data-typecn="宫崎骏风格" data-index="4" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 4 ? 'selected' : ''}}" src='./image/animegen_gqj.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_rbf" data-text="false" bind:tap="style_select" class="selectpng" src='./image/animegen_rbf.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_xhc" data-typecn="新海诚风格" data-index="5" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 5 ? 'selected' : ''}}" src='./image/animegen_xhc.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="animegen_smf" data-text="false" bind:tap="style_select" class="selectpng" src='./image/animegen_smf.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_rbf" data-typecn="日本画风格" data-index="6" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 6 ? 'selected' : ''}}" src='./image/animegen_rbf.jpg' alt="Upload Icon"></image>
   </view>
   <view class="select-item">
-    <image data-type="bodysegment" data-text="false" bind:tap="style_select" class="selectpng" src='./image/bodysegment.jpg' alt="Upload Icon"></image>
+    <image data-type="animegen_smf" data-typecn="素描风" data-index="7" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 7 ? 'selected' : ''}}" src='./image/animegen_smf.jpg' alt="Upload Icon"></image>
+  </view>
+  <view class="select-item">
+    <image data-type="bodysegment" data-typecn="人体识别" data-index="8" data-text="false" bind:tap="style_select" class="selectpng {{selectedStyleIndex === 8 ? 'selected' : ''}}" src='./image/bodysegment.jpg' alt="Upload Icon"></image>
   </view>
   <!-- <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: red;'></view>
   <view style='width:200rpx;height: 100rpx;display: inline-block;background-color: blue;'></view>
@@ -56,11 +59,12 @@
     <view style='width:200rpx;height: 200rpx;display: inline-block;background-color: yellow;'></view>
     <view style='width:200rpx;height: 200rpx;display: inline-block;background-color: black;'></view>
     </scroll-view> -->
-    <picker mode="selector" range="{{styles}}" bindchange="selectStyleChange">
+    <!-- <picker mode="selector" range="{{styles}}" bindchange="selectStyleChange">
       <view class="picker">
-      样式: {{selectedStyle}}
+      样式: {{selectedStyleCN}}
       </view>
-    </picker>
+    </picker> -->
+    <text class="showtype">样式：{{selectedStyleCN}}</text>
     <textarea wx:if="{{textEnable==='true'}}" placeholder="请输入文字" bindinput="inputTextChange" class="input-text"></textarea>
     <!-- <button class="green-button" bindtap="applyText">请输入文字</button> -->
     <button class="green-button" bindtap="always_test">生成</button>

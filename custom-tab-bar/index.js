@@ -1,39 +1,53 @@
+const app = getApp()
+
 Component({
   data: {
-    currIndex: 0,
+    currIndex: app.globalData.currIndex,
     menu: [{
-        name: "edit_text",
+        name: "文字meme",
         icon: "icon-manage",
         pagePath: "/pages/edit_text/edit_text"
       },
       {
-        name: "edit_image",
+        name: "表情包",
         icon: "icon-manage",
         pagePath: "/pages/edit_image/edit_image"
+      },
+      {
+        name: "ECNU",
+        icon: "icon-manage",
+        pagePath: "/pages/ecnulion/ecnu"
+      },
+      {
+        name: "动图",
+        icon: "icon-manage", // todo
+        pagePath: "/pages/gifs/gifs"
       }
     ]
   },
   attached(){
   },
   methods:{
-    async tabClick(e) {
-      let {
-        index
-      } = e.currentTarget.dataset;
+    tabClick(e) {
+      // let {
+      //   index
+      // } = e.currentTarget.dataset;
+      const index = e.currentTarget.dataset.index;
+
      
       if(this.data.currIndex !== index){
+        app.globalData.currIndex = index;
+        // app.globalData.eventBus.emit('currIndexChange', index);
+        app.onMyEvent(index);
         this.setData({
           currIndex: index,
         }, () => {
-          let pagePath = this.data.menu[index].pagePath;
+          const pagePath = this.data.menu[index].pagePath;
           wx.switchTab({
             url: pagePath,
           });
-        })
+        });
       }
-
     }
-    
   }
-  
 })

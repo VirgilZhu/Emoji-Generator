@@ -1,3 +1,5 @@
+const app = getApp();
+
 Page({
   data: {
     imageSrc: '',
@@ -6,12 +8,13 @@ Page({
     page:'mainPage',
     styles: ['Original', 'Grayscale', '生命历程', '黑白', '人物抠图', '漫画'],
     selectedStyle: 'Original',
+    selectedStyleCN: '无',
+    selectedStyleIndex: -1,
     textEnable:'false',
     canvasWidth: 0,
     canvasHeight: 0,
     baseImg: '',
     test1: '1',
-    display_scroll: false,
     isHidden: true,
     count: '0',
     imgWidth:0,
@@ -23,9 +26,20 @@ Page({
     cutW: 50,
     cutH: 50,
     cutL: 50,
-    cutT: 0
+    cutT: 0,
+    currIndex: app.globalData.currIndex
+  },
+  onLoad(options) {
+    const that = this;
+    app.onMyEvent = function(data) {
+      console.log("接收到的数据：", data);
+      that.setData({currIndex: data})
+    }
   },
   onShow(){
+    this.setData({
+      currIndex: app.globalData.currIndex
+    });
     if (typeof this.getTabBar === 'function' && this.getTabBar()){
       this.getTabBar().setData({
         currIndex: 1
@@ -78,8 +92,11 @@ Page({
               originSrc: tempFilePaths[0],
               canvasWidth: imageInfo.width,
               canvasHeight: imageInfo.height,
-              isHidden: false
+              isHidden: false,
+              selectedStyle: 'Original',
+              selectedStyleCN: '无'
             });
+            console.log(that.data.imageSrc)
             //that.getImagePosition();
           }
         });
@@ -361,6 +378,11 @@ Page({
                 img: base64
             };
             break;
+        case 'cannot':
+            requestPayload = {
+                img: base64
+            };
+            break;
         case 'animegen_gqj':
             requestPayload = {
                 img: base64,
@@ -480,12 +502,17 @@ Page({
 
   style_select(e) {
     const type = e.currentTarget.dataset.type; 
+    const typeCN = e.currentTarget.dataset.typecn;
+    const index = parseInt(e.currentTarget.dataset.index);
     const text = e.currentTarget.dataset.text;
     this.setData({
       selectedStyle: type,
+      selectedStyleCN: typeCN,
+      selectedStyleIndex: index,
       textEnable: text
     });
     console.log(this.data.selectedStyle);
+    console.log(this.data.selectedStyleIndex);
   },
 
   inputTextChange(e) {
@@ -540,19 +567,4 @@ Page({
     });
   },
 
-  hide_scroll(e) {
-    setTimeout(function () {
-      this.setData({
-        display_scroll: false
-      });
-    }.bind(this), 0);
-  },
-
-  show_scroll(e) {
-    setTimeout(function () {
-      this.setData({
-        display_scroll: true
-      });
-    }.bind(this), 0);
-  }
 });
