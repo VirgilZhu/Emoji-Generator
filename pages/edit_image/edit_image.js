@@ -19,6 +19,7 @@ Page({
     baseImg: '',
     test1: '1',
     isHidden: true,
+    cropEnable: false,
     count: '0',
     imgWidth:0,
     imgHeight:0,
@@ -95,9 +96,13 @@ Page({
               originSrc: tempFilePaths[0],
               canvasWidth: imageInfo.width,
               canvasHeight: imageInfo.height,
-              isHidden: false,
+              // isHidden: false,
+              cropEnable: true,
               selectedStyle: 'Original',
               selectedStyleCN: '无'
+            });
+            that.setData({
+              isHidden: false,
             });
             console.log(that.data.imageSrc)
             //that.getImagePosition();

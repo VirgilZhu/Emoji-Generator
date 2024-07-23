@@ -1,6 +1,5 @@
 // app.js
 require('./utils/v-request.js');
-import './utils/eventBus'
 
 App({
   onLaunch() {

@@ -3,7 +3,7 @@
     <image class="btnUploadImg" src='./image/upload.png' alt="Upload Icon"></image>
     <view>上传</view>
   </button>
-  <button wx:if="{{imageSrc}}" style="width:28vw" class="btnCut" bindtap="startCrop">
+  <button style="width:28vw" class="btnCut" bindtap="startCrop" disabled="{{!imageSrc}}">
     <image class="btnUploadImg" src='./image/cut.png' alt="Upload Icon"></image>
     <view>裁剪</view>
   </button>
@@ -12,7 +12,7 @@
     <view>保存</view>
   </button>
 
-  <image src="{{imageSrc || './image/cam.webp'}}" mode="aspectFit" catch:tap="chooseImage" class="preview-image {{selectedStyle}}"></image>
+  <image src="{{imageSrc || 'http://sh373q9yg.hd-bkt.clouddn.com/cam.webp'}}" mode="aspectFit" catch:tap="chooseImage" class="preview-image {{selectedStyle}}"></image>
 
   <scroll-view hidden="{{isHidden}}" class="style-select"  scroll-x >
   <view class="select-item">
