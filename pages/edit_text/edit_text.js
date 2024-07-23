@@ -159,7 +159,8 @@ Page({
     }
 
     wx.request({
-      url: `http://39.105.8.203${requestType}`, // 替换为你的后端接口
+      // url: `http://39.105.8.203${requestType}`, 
+      url: `http://127.0.0.1:5000${requestType}`,// 替换为你的后端接口
       method: 'POST',
       data: requestData,
       success: (res) => {
